@@ -1,6 +1,6 @@
-# name of non-profit
+# Paso Robles Food Cooperative
 
-{One sentence description of the project}
+The Paso Robles Food Co-op is launching a referral program to incentivize community members to spread the word and help the co-op reach its membership goal of 500 owners.
 
 ## Table of Contents
 
@@ -13,17 +13,27 @@
 
 ### Purpose
 
-{Short paragraph description of the non-profit mission and the purpose of this project. Who will this project help, why is it necessary. Impact of the project.}
+The Paso Robles Food Co-op is a non-profit organization dedicated to building a community-owned grocery store that prioritizes local, fresh, and healthy food. This referral program is essential to achieving their mission by increasing membership. By incentivizing current members to spread the word, the co-op can accelerate the path to opening its doors, providing the community with increased access to high-quality, locally sourced food. This will have a significant positive impact by supporting local farmers and producers, strengthening the local economy, and improving the overall health and well-being of the community.
 
 ### Team
 
-The {non-profit name} team consists of {#} Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
+The PRFC team consists of 15 Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
 
-- [First Last](https://www.linkedin.com/) - Project Manager
-- [First Last](https://www.linkedin.com/) - Designer
-- [First Last](https://www.linkedin.com/) - Tech Lead
-- [First Last](https://www.linkedin.com/) - Tech Lead
-- [First Last](https://www.linkedin.com/) - Software Developer
+- [Alexios Sideris](https://www.linkedin.com/) - Project Manager
+- [Naomi Tan](https://www.linkedin.com/) - Designer
+- [Kayle Le](https://www.linkedin.com/) - Designer
+- [Anagha Kulkami](https://www.linkedin.com/) - Designer
+- [Ivan Alvarez](https://www.linkedin.com/) - Tech Lead
+- [Amanda Chan](https://www.linkedin.com/) - Tech Lead
+- [Vinayak Kohli](https://www.linkedin.com/) - Software Developer
+- [Deep Singh](https://www.linkedin.com/) - Software Developer
+- [Karthik Balaji](https://www.linkedin.com/) - Software Developer
+- [Min Hset Hlaing](https://www.linkedin.com/) - Software Developer
+- [Chenyi Zhao](https://www.linkedin.com/) - Software Developer
+- [Sue Sue](https://www.linkedin.com/) - Software Developer
+- [Camila Yeremin](https://www.linkedin.com/) - Software Developer
+- [Winnie Trinh](https://www.linkedin.com/) - Software Developer
+- [Charles Moreno](https://www.linkedin.com/) - Software Developer
 
 ## Getting Started And Contributing
 
