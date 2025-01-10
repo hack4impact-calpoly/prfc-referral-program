@@ -1,20 +1,6 @@
-import mongoose from "mongoose";
+import { PrismaClient } from "@prisma/client";
 
-const url: string = process.env.MONGO_URI as string;
-let connection: typeof mongoose;
+// Prisma Client automatically manages the database connection for you.
+const prisma = new PrismaClient();
 
-/**
- * Makes a connection to a MongoDB database. If a connection already exists, does nothing
- * Call this function before all api routes
- * @returns {Promise<typeof mongoose>}
- */
-const connectDB = async () => {
-  if (!connection) {
-    // uncomment this line once you have the MONGO_URI set up
-    // connection = await mongoose.connect(url);
-    connection = "remove me" as any; // remove me
-    return connection;
-  }
-};
-
-export default connectDB;
+export default prisma;
