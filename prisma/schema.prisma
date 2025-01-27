@@ -8,43 +8,13 @@ datasource db {
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model referralprogram {
-  id           Int       @id @unique @default(autoincrement())
-  ref_id       String?   @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  total_points Int?      @default(0)
-  tblowner     tblowner?
-}
-
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model tblowner {
-  owneremail         String?          @db.VarChar
-  ownerpasswordhash  String?          @db.VarChar
-  ownerstatus        Int?
-  ownername          String?          @db.VarChar
-  owneraddress1      String?          @db.VarChar
-  owneraddress2      String?          @db.VarChar
-  ownercity          String?          @db.VarChar
-  ownerstate         String?          @db.VarChar
-  ownerzip           String?          @db.VarChar
-  ownercountry       String?          @db.VarChar
-  creationdate       DateTime?        @db.Date
-  validthrudate      DateTime?        @db.Date
-  lastloggedondate   DateTime?        @db.Date
-  downloadcount      Int?
-  default_project_id Int?
-  active             Int?             @default(0)
-  ownerid            Int
-  max_guids          Int?             @default(0)
-  img_cust_id        String?          @db.VarChar
-  ownerphone         String?          @db.VarChar
-  acctid             String?          @db.VarChar
-  ownertotal         Float?           @db.Real
-  owneraltphone      String?          @db.VarChar
-  ownersecondname    String?          @db.VarChar
-  ownerorgdata       String?          @db.VarChar
-  joindate           DateTime?        @db.Date
-  ownerbusinessid    String?          @db.VarChar
-  id                 Int              @id @unique @default(autoincrement())
-  referral           Int?             @unique
-  referralprogram    referralprogram? @relation(fields: [referral], references: [id], onUpdate: NoAction)
+model referral {
+  id             BigInt   @id @default(autoincrement())
+  created_at     DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  member_name    String
+  member_email   String
+  prospect_name  String
+  prospect_email String
+  referral_code  String
+  redeemed       Boolean  @default(false)
 }
