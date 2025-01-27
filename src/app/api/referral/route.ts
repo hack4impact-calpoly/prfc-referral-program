@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { resp } = body;
-    const newReferral = await prisma.referral.create({
+    const newReferral = await prisma.referralprogram.create({
       data: {},
     });
     return NextResponse.json(newReferral, { status: 201 });
