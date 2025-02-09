@@ -18,7 +18,9 @@ export default function ReferralForm() {
   };
 
   // Function to handle changes in prospect fields
-  const handleProspectChange = (index: number, field: string, value: string) => {
+  type ProspectField = "email" | "firstName" | "lastName";
+
+  const handleProspectChange = (index: number, field: ProspectField, value: string) => {
     const newProspects = [...prospects];
     newProspects[index][field] = value;
     setProspects(newProspects);
