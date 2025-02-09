@@ -9,7 +9,7 @@ datasource db {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model referral {
-  id             BigInt   @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
   created_at     DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
   member_name    String
   member_email   String
