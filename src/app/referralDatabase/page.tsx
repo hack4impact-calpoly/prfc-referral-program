@@ -1,4 +1,4 @@
-import ReferralDataGrid from "./ReferralDataGrid";
+import ReferralDataGrid from "@/components/ReferralDatabase/ReferralDataGrid";
 
 //referral page to display user data
 export default function ReferralDatabase() {

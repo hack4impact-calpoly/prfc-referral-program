@@ -1,6 +1,7 @@
 "use client"; //marks as a client component (MUI required)
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import style from "./ReferralDataGrid.module.css";
 import * as React from "react";
 
 //populating with dummy data
