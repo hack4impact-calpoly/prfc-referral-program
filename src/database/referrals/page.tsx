@@ -1,5 +1,6 @@
 import ReferralDataGrid from "./ReferralDataGrid";
 
+//referral page to display user data
 export default function ReferralDatabase() {
   return (
     <div>

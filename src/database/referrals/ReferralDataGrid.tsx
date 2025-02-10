@@ -3,14 +3,6 @@
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import * as React from "react";
 
-function QuickSearchToolbar() {
-  return (
-    <div style={{ padding: "8px" }}>
-      <GridToolbarQuickFilter placeholder="Search referrals..." />
-    </div>
-  );
-}
-
 //populating with dummy data
 const rows: GridRowsProp = [
   {
@@ -42,6 +34,7 @@ const rows: GridRowsProp = [
   },
 ];
 
+//fields for data
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
   { field: "member_name", headerName: "MemberName", width: 150, sortable: true },
@@ -52,6 +45,7 @@ const columns: GridColDef[] = [
   { field: "redeemed", headerName: "Redeemed", width: 150 },
 ];
 
+//allowing for searching and sorting
 export default function ReferralDataGrid() {
   return (
     <div style={{ height: 300, width: "100%" }}>
@@ -60,7 +54,6 @@ export default function ReferralDataGrid() {
         columns={columns}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        //components={{ Toolbar: GridToolbar }}
         slots={{ toolbar: GridToolbar }}
         slotProps={{
           toolbar: {
