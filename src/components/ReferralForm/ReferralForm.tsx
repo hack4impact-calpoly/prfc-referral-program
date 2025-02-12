@@ -31,6 +31,12 @@ export default function ReferralForm() {
     setProspects([...prospects, { email: "", firstName: "", lastName: "" }]);
   };
 
+  const deleteProspect = (index: number) => {
+    const newProspects = [...prospects];
+    newProspects.splice(index, 1);
+    setProspects(newProspects);
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Email Submission Form</h1>
@@ -49,7 +55,10 @@ export default function ReferralForm() {
           />
         </div>
         {prospects.map((prospect, index) => (
-          <div key={index}>
+          <div key={index} className={styles.prospectContainer}>
+            <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
+              ✖
+            </button>
             <label htmlFor={`prospectEmail${index}`} className={styles.label}>
               Prospect Email
             </label>

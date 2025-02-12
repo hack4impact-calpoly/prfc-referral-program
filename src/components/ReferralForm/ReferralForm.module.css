@@ -88,3 +88,28 @@
 .form > div {
   margin-bottom: 1rem;
 }
+
+/* Delete button */
+.prospectContainer {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.crossButton {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+
+.crossButton:hover {
+  color: darkred;
+}
