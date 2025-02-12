@@ -1,61 +1,115 @@
-/* nice default css styles from genAI as placeholder before design is finalized */
-
+/* Container styling */
 .container {
-  max-width: 28rem;
-  margin: 2.5rem auto;
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  max-width: 32rem;
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f9fafb;
+  box-sizing: border-box; /* Ensure padding is included in the container size */
 }
 
+/* Title styling */
 .title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  text-align: center;
 }
 
+/* Form layout */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
+/* Label styling */
 .label {
-  display: block;
   font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #374151;
 }
 
+/* Input field styling */
 .input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-top: 0.5rem; /* Space between label and input */
+  margin-bottom: 1rem; /* Increased space between input fields */
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  color: #111827;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+  box-sizing: border-box;
 }
 
+/* Input field focus styling */
 .input:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
 }
 
+/* Button styling */
 .button {
-  width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   background-color: #2563eb;
   color: #ffffff;
   border: none;
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+  text-align: center;
 }
 
+/* Button hover and active effects */
 .button:hover {
   background-color: #1d4ed8;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* Spacing between sections */
+.form > div {
+  margin-bottom: 1rem;
+}
+
+/* Delete button */
+.prospectContainer {
+  position: relative;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+.crossButton {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+
+.crossButton:hover {
+  color: darkred;
 }
