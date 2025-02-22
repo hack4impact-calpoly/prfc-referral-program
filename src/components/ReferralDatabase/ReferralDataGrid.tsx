@@ -46,32 +46,33 @@ const columns: GridColDef[] = [
   { field: "redeemed", headerName: "Redeemed", flex: 1 },
 ];
 
-// Custom Toolbar Component
 const CustomToolbar = () => {
   return (
-    <div style={{ padding: "8px" }}>
+    <div style={{ padding: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       {/* Search Bar with Border */}
       <div
         style={{
           display: "flex",
-          alignItems: "center",
           border: "2px solid #831002", // Border color
-          borderRadius: "12px",
+          borderRadius: "28px",
           padding: "4px 8px",
           backgroundColor: "#fff",
           width: "fit-content",
+          marginRight: "16px", // Adds space between search bar and default toolbar
         }}
       >
-        {/*<SearchIcon style={{ color: "#831002", marginRight: "8px" }} />*/}
         <GridToolbarQuickFilter
           sx={{
             border: "none", // Remove default border
             outline: "none", // Remove focus outline
+            "& input": {
+              textDecoration: "none", // Remove underline from input field
+            },
           }}
         />
       </div>
 
-      {/* Default Toolbar */}
+      {/* Styled Default Toolbar */}
       <GridToolbar />
     </div>
   );
