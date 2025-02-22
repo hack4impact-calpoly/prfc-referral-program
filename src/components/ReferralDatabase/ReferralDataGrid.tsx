@@ -1,8 +1,8 @@
 "use client"; //marks as a client component (MUI required)
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import style from "./ReferralDataGrid.module.css";
 import * as React from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 //populating with dummy data
 const rows: GridRowsProp = [
@@ -35,30 +35,86 @@ const rows: GridRowsProp = [
   },
 ];
 
-//fields for data
+// Fields for data
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
-  { field: "member_name", headerName: "MemberName", width: 150, sortable: true },
-  { field: "member_email", headerName: "MemberEmail", width: 150, sortable: true },
-  { field: "prospect_name", headerName: "ProspectName", width: 150, sortable: true },
-  { field: "prospect_email", headerName: "ProspectEmail", width: 150, sortable: true },
-  { field: "referral_code", headerName: "Code", width: 150 },
-  { field: "redeemed", headerName: "Redeemed", width: 150 },
+  { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
+  { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
+  { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
+  { field: "prospect_email", headerName: "ProspectEmail", flex: 1, sortable: true },
+  { field: "referral_code", headerName: "Code", flex: 1 },
+  { field: "redeemed", headerName: "Redeemed", flex: 1 },
 ];
+
+// Custom Toolbar Component
+const CustomToolbar = () => {
+  return (
+    <div style={{ padding: "8px" }}>
+      {/* Search Bar with Border */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          border: "2px solid #831002", // Border color
+          borderRadius: "12px",
+          padding: "4px 8px",
+          backgroundColor: "#fff",
+          width: "fit-content",
+        }}
+      >
+        {/*<SearchIcon style={{ color: "#831002", marginRight: "8px" }} />*/}
+        <GridToolbarQuickFilter
+          sx={{
+            border: "none", // Remove default border
+            outline: "none", // Remove focus outline
+          }}
+        />
+      </div>
+
+      {/* Default Toolbar */}
+      <GridToolbar />
+    </div>
+  );
+};
 
 //allowing for searching and sorting
 export default function ReferralDataGrid() {
   return (
-    <div style={{ height: 300, width: "100%" }}>
+    <div style={{ height: 572, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        slots={{ toolbar: GridToolbar }}
+        density="compact"
+        slots={{ toolbar: CustomToolbar }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,
+          },
+        }}
+        sx={{
+          border: "2px solid #968676",
+          borderRadius: "12px",
+          display: "flex",
+          gap: "1rem",
+          padding: "1rem",
+          "& .MuiDataGrid-columnHeader": {
+            borderTop: "2px solid #968676", // Border for top of column headers
+            backgroundColor: "#EDDDCC !important", // Set the background color of column headers
+            color: "#831002", // Set text color of headers
+          },
+          "& .MuiDataGrid-columnHeaderTitle": {
+            fontWeight: "bold", // Force the title text to be bold
+            textDecoration: "underline",
+          },
+          "& .MuiDataGrid-row": {
+            "&:nth-of-type(odd)": {
+              backgroundColor: "#D9D9D9", // Odd row background color
+            },
+            "&:nth-of-type(even)": {
+              backgroundColor: "#ffffff", // Even row background color
+            },
           },
         }}
       />

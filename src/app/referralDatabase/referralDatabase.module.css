@@ -1,0 +1,9 @@
+/* Apply to h1 */
+.pageTitle {
+  font-size: 1.5rem;
+}
+
+.referralHistContainer {
+  background-color: #fadfc4;
+  padding: 20px 52px; /*top and bottom, left and right*/
+}
