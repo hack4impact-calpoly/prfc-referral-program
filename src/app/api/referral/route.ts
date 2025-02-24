@@ -56,6 +56,8 @@ export async function GET(req: NextRequest) {
     // Fetch all referrals from the referral table
     const referrals = await prisma.referral.findMany();
 
+    console.log("Referrals:", referrals);
+
     return NextResponse.json(JSON.parse(JSON.stringify(referrals, bigIntReplacer)), { status: 200 });
   } catch (err) {
     console.error("Error fetching referrals:", err);

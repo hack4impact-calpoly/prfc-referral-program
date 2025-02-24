@@ -1,39 +1,7 @@
 "use client"; //marks as a client component (MUI required)
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import * as React from "react";
-import SearchIcon from "@mui/icons-material/Search";
-
-//populating with dummy data
-const rows: GridRowsProp = [
-  {
-    id: 1,
-    member_name: "John",
-    member_email: "john@gmail.com",
-    prospect_name: "Alice",
-    prospect_email: "alice@gmail.com",
-    referral_code: "11111",
-    redeemed: true,
-  },
-  {
-    id: 2,
-    member_name: "Bob",
-    member_email: "bob@gmail.com",
-    prospect_name: "Joe",
-    prospect_email: "joe@gmail.com",
-    referral_code: "11112",
-    redeemed: true,
-  },
-  {
-    id: 3,
-    member_name: "Bill",
-    member_email: "bill@gmail.com",
-    prospect_name: "Rob",
-    prospect_email: "rob@gmail.com",
-    referral_code: "11113",
-    redeemed: true,
-  },
-];
+import { useState, useEffect } from "react";
 
 // Fields for data
 const columns: GridColDef[] = [
@@ -80,6 +48,23 @@ const CustomToolbar = () => {
 
 //allowing for searching and sorting
 export default function ReferralDataGrid() {
+  const [rows, setRows] = useState<GridRowsProp>([]);
+
+  useEffect(() => {
+    const fetchReferrals = async () => {
+      try {
+        const response = await fetch("/api/referral");
+        if (!response.ok) throw new Error("Failed to fetch referrals");
+        const data = await response.json();
+        setRows(data);
+      } catch (error) {
+        console.error("Error fetching referrals:", error);
+      }
+    };
+
+    fetchReferrals();
+  }, []);
+
   return (
     <div style={{ height: 572, width: "100%" }}>
       <DataGrid
