@@ -2,19 +2,71 @@
 
 import styles from "./ReferralForm.module.css"; // Importing CSS module for styling
 
-import React, { useState } from "react"; // Importing React and useState hook
+import React, { useState, useEffect } from "react"; // Importing React and useState hook
+import { useSearchParams } from "next/navigation"; // Importing useSearchParams from Next.js
 
 export default function ReferralForm() {
   // State to manage the user's email
   const [yourEmail, setYourEmail] = useState("");
   // State to manage the list of prospects
   const [prospects, setProspects] = useState([{ email: "", firstName: "", lastName: "" }]);
+  // State to manage hidden fields
+  const [referrerEmail, setReferrerEmail] = useState("");
+  const [referrerFirstName, setReferrerFirstName] = useState("");
+  const [referrerLastName, setReferrerLastName] = useState("");
+  const [referralCode, setReferralCode] = useState("");
+
+  // Retrieve search parameters from the URL
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    // Extract data from URL search parameters
+    const fullName = searchParams.get("nm") || "";
+    const email = searchParams.get("em") || "";
+    const code = searchParams.get("ref") || "";
+
+    // Split full name into first and last name
+    const [firstName, lastName] = fullName.split(" ");
+
+    // Set state variables with extracted data
+    setReferrerEmail(email);
+    setReferrerFirstName(firstName || "");
+    setReferrerLastName(lastName || "");
+    setReferralCode(code);
+  }, [searchParams]);
 
   // Function to handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Functionality to be implemented later
-    console.log("Submit button clicked, but no action defined yet.");
+
+    // Create referral data object
+    const referralData = {
+      referrerEmail,
+      referrerFirstName,
+      referrerLastName,
+      referralCode,
+      yourEmail,
+      prospects,
+    };
+
+    try {
+      // Send POST request to create a new referral
+      const response = await fetch("/api/referral", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(referralData),
+      });
+
+      if (response.ok) {
+        console.log("Referral created successfully");
+      } else {
+        console.error("Failed to create referral");
+      }
+    } catch (error) {
+      console.error("Error creating referral:", error);
+    }
   };
 
   // Function to handle changes in prospect fields
@@ -31,6 +83,7 @@ export default function ReferralForm() {
     setProspects([...prospects, { email: "", firstName: "", lastName: "" }]);
   };
 
+  // Function to delete a prospect from the list
   const deleteProspect = (index: number) => {
     const newProspects = [...prospects];
     newProspects.splice(index, 1);
@@ -98,10 +151,10 @@ export default function ReferralForm() {
           Add Another Prospect
         </button>
         {/* Hidden fields for referrer details and referral code */}
-        <input type="hidden" name="referrerEmail" value="referrer@example.com" />
-        <input type="hidden" name="referrerFirstName" value="ReferrerFirstName" />
-        <input type="hidden" name="referrerLastName" value="ReferrerLastName" />
-        <input type="hidden" name="referralCode" value="REF12345" />
+        <input type="hidden" name="referrerEmail" value={referrerEmail} />
+        <input type="hidden" name="referrerFirstName" value={referrerFirstName} />
+        <input type="hidden" name="referrerLastName" value={referrerLastName} />
+        <input type="hidden" name="referralCode" value={referralCode} />
         <button type="submit" className={styles.button}>
           Submit
         </button>
