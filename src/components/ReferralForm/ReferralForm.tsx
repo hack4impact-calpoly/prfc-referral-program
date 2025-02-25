@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react"; // Importing React and useSt
 import { useSearchParams } from "next/navigation"; // Importing useSearchParams from Next.js
 
 export default function ReferralForm() {
+  // Retrieve search parameters from the URL
+  const searchParams = useSearchParams();
   // State to manage the user's email
   const [yourEmail, setYourEmail] = useState("");
   // State to manage the list of prospects
@@ -16,38 +18,52 @@ export default function ReferralForm() {
   const [referrerLastName, setReferrerLastName] = useState("");
   const [referralCode, setReferralCode] = useState("");
 
-  // Retrieve search parameters from the URL
-  const searchParams = useSearchParams();
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    if (!searchParams) return;
     // Extract data from URL search parameters
-    const fullName = searchParams.get("nm") || "";
+    const fullName = searchParams.get("nm") || "".trim();
     const email = searchParams.get("em") || "";
     const code = searchParams.get("ref") || "";
 
-    // Split full name into first and last name
-    const [firstName, lastName] = fullName.split(" ");
-
-    // Set state variables with extracted data
+    const nameParts = fullName.split(" ");
+    setReferrerFirstName(nameParts[0] || "");
+    setReferrerLastName(nameParts.slice(1).join(" ") || "");
     setReferrerEmail(email);
-    setReferrerFirstName(firstName || "");
-    setReferrerLastName(lastName || "");
     setReferralCode(code);
+    console.log("Extracted URL Parameters:", { fullName, email, code });
   }, [searchParams]);
 
   // Function to handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    // Clear previous error messages
+    setErrorMessage("");
+
+    // Check if all required fields for prospects are filled
+    for (let i = 0; i < prospects.length; i++) {
+      const prospect = prospects[i];
+      if (!prospect.email.trim() || !prospect.firstName.trim() || !prospect.lastName.trim()) {
+        setErrorMessage(`Please fill out all fields for Prospect ${i + 1}.`);
+        return; // Exit submission function if any required field is missing
+      }
+    }
+
     // Create referral data object
     const referralData = {
-      referrerEmail,
-      referrerFirstName,
-      referrerLastName,
-      referralCode,
-      yourEmail,
-      prospects,
+      member_name: `${referrerFirstName} ${referrerLastName}`.trim(),
+      member_email: referrerEmail,
+      referral_code: referralCode,
+      prospects: prospects.map((prospect) => ({
+        prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
+        prospect_email: prospect.email,
+      })),
     };
+
+    // Log
+    console.log("Sending/Submitting referralData:", referralData);
 
     try {
       // Send POST request to create a new referral
@@ -59,13 +75,22 @@ export default function ReferralForm() {
         body: JSON.stringify(referralData),
       });
 
+      const responseData = await response.json();
+      // Log API response
+      console.log("API Response:", responseData);
+
       if (response.ok) {
         console.log("Referral created successfully");
+        // Reset form after successful submission
+        setProspects([{ email: "", firstName: "", lastName: "" }]);
+        setYourEmail("");
       } else {
         console.error("Failed to create referral");
+        setErrorMessage("Failed to submit the form. Please try again!");
       }
     } catch (error) {
       console.error("Error creating referral:", error);
+      setErrorMessage("An error occured while submitting the form.");
     }
   };
 
@@ -150,6 +175,8 @@ export default function ReferralForm() {
         <button type="button" onClick={addProspect} className={styles.button}>
           Add Another Prospect
         </button>
+        {/* Display error message if validation fails */}
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         {/* Hidden fields for referrer details and referral code */}
         <input type="hidden" name="referrerEmail" value={referrerEmail} />
         <input type="hidden" name="referrerFirstName" value={referrerFirstName} />

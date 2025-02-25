@@ -17,9 +17,10 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.3",
     "@mui/x-data-grid": "^7.26.0",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^6.4.1",
     "mongoose": "^8",
     "next": "^15.1.6",
+    "prisma": "^6.4.1",
     "react": "^18",
     "react-dom": "^18"
   },
