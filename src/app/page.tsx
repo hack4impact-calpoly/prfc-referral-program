@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import ReferralForm from "@/components/ReferralForm/ReferralForm";
-import ReferralDatabase from "./referralDatabase/page";
 
 export default function Home() {
   return (
