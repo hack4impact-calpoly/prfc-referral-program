@@ -72,7 +72,6 @@ export default function ReferralDataGrid() {
         columns={columns}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        density="compact"
         slots={{ toolbar: CustomToolbar }}
         slotProps={{
           toolbar: {

@@ -6,11 +6,11 @@ import localFont from "next/font/local";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// Load font manually
-const komikaAxis = localFont({
-  src: "../../public/fonts/KomikaAxis.ttf",
-  display: "swap",
-});
+// // Load font manually
+// const komikaAxis = localFont({
+//   src: "../../public/fonts/KomikaAxis.ttf",
+//   display: "swap",
+// });
 
 //referral page to display user data
 export default function ReferralDatabase() {
@@ -18,7 +18,7 @@ export default function ReferralDatabase() {
     <div>
       <Header />
       <div className={styles.referralHistContainer}>
-        <h1 className={`${styles.pageTitle} ${komikaAxis.className}`}>Referral History</h1>
+        <h1 className={`${styles.pageTitle}`}>Referral History</h1>
         <ReferralDataGrid />
       </div>
     </div>
