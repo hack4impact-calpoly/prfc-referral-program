@@ -51,7 +51,7 @@ Welcome to the getting started page! Here is all you need to know to get this re
 
 - [**.github**](/.github) Github Actions CI/CD and Issue/PR templates
 - [**docs**](/docs) Documentation - Documentation that came with the template repository
-- [**public**](/public) Assets for frontend [Read More](https://nextjs.org/docs/pages/building-your-application/optimizing/static-assets)
+- [**public**](/src/public) Assets for frontend [Read More](https://nextjs.org/docs/pages/building-your-application/optimizing/static-assets)
 - [**src**](/src) All application code
   - [**app**](/src/app/) Frontend and API code
     - [**api**](/src/app/api) All API routes

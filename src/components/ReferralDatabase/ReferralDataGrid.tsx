@@ -1,64 +1,105 @@
 "use client"; //marks as a client component (MUI required)
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import style from "./ReferralDataGrid.module.css";
-import * as React from "react";
+import { useState, useEffect } from "react";
 
-//populating with dummy data
-const rows: GridRowsProp = [
-  {
-    id: 1,
-    member_name: "John",
-    member_email: "john@gmail.com",
-    prospect_name: "Alice",
-    prospect_email: "alice@gmail.com",
-    referral_code: "11111",
-    redeemed: true,
-  },
-  {
-    id: 2,
-    member_name: "Bob",
-    member_email: "bob@gmail.com",
-    prospect_name: "Joe",
-    prospect_email: "joe@gmail.com",
-    referral_code: "11112",
-    redeemed: true,
-  },
-  {
-    id: 3,
-    member_name: "Bill",
-    member_email: "bill@gmail.com",
-    prospect_name: "Rob",
-    prospect_email: "rob@gmail.com",
-    referral_code: "11113",
-    redeemed: true,
-  },
-];
-
-//fields for data
+// Fields for data
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 90 },
-  { field: "member_name", headerName: "MemberName", width: 150, sortable: true },
-  { field: "member_email", headerName: "MemberEmail", width: 150, sortable: true },
-  { field: "prospect_name", headerName: "ProspectName", width: 150, sortable: true },
-  { field: "prospect_email", headerName: "ProspectEmail", width: 150, sortable: true },
-  { field: "referral_code", headerName: "Code", width: 150 },
-  { field: "redeemed", headerName: "Redeemed", width: 150 },
+  { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
+  { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
+  { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
+  { field: "prospect_email", headerName: "ProspectEmail", flex: 1, sortable: true },
+  { field: "referral_code", headerName: "Code", flex: 1 },
+  { field: "redeemed", headerName: "Redeemed", flex: 1 },
 ];
+
+const CustomToolbar = () => {
+  return (
+    <div style={{ padding: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      {/* Search Bar with Border */}
+      <div
+        style={{
+          display: "flex",
+          border: "2px solid #831002", // Border color
+          borderRadius: "28px",
+          padding: "4px 8px",
+          backgroundColor: "#fff",
+          width: "fit-content",
+          marginRight: "16px", // Adds space between search bar and default toolbar
+        }}
+      >
+        <GridToolbarQuickFilter
+          sx={{
+            border: "none", // Remove default border
+            outline: "none", // Remove focus outline
+            "& input": {
+              textDecoration: "none", // Remove underline from input field
+            },
+          }}
+        />
+      </div>
+
+      {/* Styled Default Toolbar */}
+      <GridToolbar />
+    </div>
+  );
+};
 
 //allowing for searching and sorting
 export default function ReferralDataGrid() {
+  const [rows, setRows] = useState<GridRowsProp>([]);
+
+  useEffect(() => {
+    const fetchReferrals = async () => {
+      try {
+        const response = await fetch("/api/referral");
+        if (!response.ok) throw new Error("Failed to fetch referrals");
+        const data = await response.json();
+        setRows(data);
+      } catch (error) {
+        console.error("Error fetching referrals:", error);
+      }
+    };
+
+    fetchReferrals();
+  }, []);
+
   return (
-    <div style={{ height: 300, width: "100%" }}>
+    <div style={{ height: 572, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        slots={{ toolbar: GridToolbar }}
+        slots={{ toolbar: CustomToolbar }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,
+          },
+        }}
+        sx={{
+          border: "2px solid #968676",
+          borderRadius: "12px",
+          display: "flex",
+          gap: "1rem",
+          padding: "1rem",
+          "& .MuiDataGrid-columnHeader": {
+            borderTop: "2px solid #968676", // Border for top of column headers
+            backgroundColor: "#EDDDCC !important", // Set the background color of column headers
+            color: "#831002", // Set text color of headers
+          },
+          "& .MuiDataGrid-columnHeaderTitle": {
+            fontWeight: "bold", // Force the title text to be bold
+            textDecoration: "underline",
+          },
+          "& .MuiDataGrid-row": {
+            "&:nth-of-type(odd)": {
+              backgroundColor: "#D9D9D9", // Odd row background color
+            },
+            "&:nth-of-type(even)": {
+              backgroundColor: "#ffffff", // Even row background color
+            },
           },
         }}
       />
