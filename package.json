@@ -20,7 +20,6 @@
     "@prisma/client": "^6.4.1",
     "mongoose": "^8",
     "next": "^15.1.6",
-    "prisma": "^6.4.1",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -35,6 +34,7 @@
     "husky": "^9",
     "lint-staged": "^15",
     "prettier": "^3.4.2",
+    "prisma": "^6.4.1",
     "typescript": "^5"
   }
 }

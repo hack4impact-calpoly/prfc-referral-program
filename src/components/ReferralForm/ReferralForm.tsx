@@ -32,7 +32,10 @@ export default function ReferralForm() {
     setReferrerLastName(nameParts.slice(1).join(" ") || "");
     setReferrerEmail(email);
     setReferralCode(code);
-    console.log("Extracted URL Parameters:", { fullName, email, code });
+
+    if (email) {
+      setYourEmail(email);
+    }
   }, [searchParams]);
 
   // Function to handle form submission
@@ -62,9 +65,6 @@ export default function ReferralForm() {
       })),
     };
 
-    // Log
-    console.log("Sending/Submitting referralData:", referralData);
-
     try {
       // Send POST request to create a new referral
       const response = await fetch("/api/referral", {
@@ -74,10 +74,6 @@ export default function ReferralForm() {
         },
         body: JSON.stringify(referralData),
       });
-
-      const responseData = await response.json();
-      // Log API response
-      console.log("API Response:", responseData);
 
       if (response.ok) {
         console.log("Referral created successfully");

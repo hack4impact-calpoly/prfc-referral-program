@@ -5,7 +5,6 @@ export async function POST(req: NextRequest) {
   try {
     // Parse JSON body from the request
     const body = await req.json();
-    console.log("Received Data:", body);
 
     // Destructure required parameters from the request body
     const { member_name, member_email, prospects, referral_code } = body;
