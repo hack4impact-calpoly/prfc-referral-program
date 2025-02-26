@@ -10,13 +10,6 @@ export default function ReferralForm() {
   // State to manage the list of prospects
   const [prospects, setProspects] = useState([{ email: "", firstName: "", lastName: "" }]);
 
-  // Function to handle form submission
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    // Functionality to be implemented later
-    console.log("Submit button clicked, but no action defined yet.");
-  };
-
   // Function to handle changes in prospect fields
   type ProspectField = "email" | "firstName" | "lastName";
 
@@ -35,6 +28,34 @@ export default function ReferralForm() {
     const newProspects = [...prospects];
     newProspects.splice(index, 1);
     setProspects(newProspects);
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const requestBody = {
+      member_name: "firstMember lastMember", // Hardcoded for testing
+      member_email: yourEmail,
+      prospect_name: `${prospects[0]?.firstName ?? ""} ${prospects[0]?.lastName ?? ""}`.trim(),
+      prospect_email: prospects[0]?.email ?? "",
+      referral_code: "testcode",
+    };
+
+    console.log("Submitting to API:", requestBody);
+
+    try {
+      const response = await fetch("/api/referral", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestBody),
+      });
+
+      const result = await response.json();
+      console.log("API Response:", result);
+    } catch (error) {
+      console.error("Error submitting referral:", error);
+    }
   };
 
   return (

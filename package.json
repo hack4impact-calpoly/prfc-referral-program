@@ -17,14 +17,16 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.3",
     "@mui/x-data-grid": "^7.26.0",
-    "@prisma/client": "^6.2.1",
     "mongoose": "^8",
     "next": "^15.1.6",
+    "nodemailer": "^6.10.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@prisma/client": "^6.4.1",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -34,6 +36,7 @@
     "husky": "^9",
     "lint-staged": "^15",
     "prettier": "^3.4.2",
+    "prisma": "^6.4.1",
     "typescript": "^5"
   }
 }
