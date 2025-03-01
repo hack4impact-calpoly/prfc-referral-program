@@ -17,7 +17,7 @@ The Paso Robles Food Co-op is a non-profit organization dedicated to building a 
 
 ### Team
 
-The PRFC team consists of 15 Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
+The PRFC team consists of 13 Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
 
 - [Alexios Sideris](https://www.linkedin.com/in/alexios-sideris/) - Project Manager
 - [Naomi Tan](https://www.linkedin.com/) - Designer
