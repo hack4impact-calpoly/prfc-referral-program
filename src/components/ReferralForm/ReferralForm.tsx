@@ -126,6 +126,7 @@ export default function ReferralForm() {
             onChange={(e) => setYourEmail(e.target.value)}
             placeholder="Enter your email"
             className={styles.input}
+            readOnly
           />
         </div>
         {prospects.map((prospect, index) => (
