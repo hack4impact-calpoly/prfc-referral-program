@@ -2,17 +2,7 @@
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-
-// Fields for data
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
-  { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
-  { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
-  { field: "prospect_email", headerName: "ProspectEmail", flex: 1, sortable: true },
-  { field: "referral_code", headerName: "Code", flex: 1 },
-  { field: "redeemed", headerName: "Redeemed", flex: 1 },
-];
+import Switch from "@mui/material/Switch";
 
 const CustomToolbar = () => {
   return (
@@ -49,6 +39,43 @@ const CustomToolbar = () => {
 //allowing for searching and sorting
 export default function ReferralDataGrid() {
   const [rows, setRows] = useState<GridRowsProp>([]);
+
+  // Handles toggling the 'redeemed' status
+  const handleToggleRedeemed = async (id: number) => {
+    try {
+      const updatedRow = rows.map((row) => (row.id === id ? { ...row, redeemed: !row.redeemed } : row));
+
+      setRows(updatedRow); // Optimistically update the UI
+
+      const response = await fetch(`/api/referral/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ redeemed: !rows.find((row) => row.id === id)?.redeemed }),
+      });
+
+      if (!response.ok) throw new Error("Failed to update referral");
+    } catch (error) {
+      console.error("Error updating referral:", error);
+    }
+  };
+
+  // Fields for data
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
+    { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
+    { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
+    { field: "prospect_email", headerName: "ProspectEmail", flex: 1, sortable: true },
+    { field: "referral_code", headerName: "Code", flex: 1 },
+    {
+      field: "redeemed",
+      headerName: "Redeemed",
+      flex: 1,
+      renderCell: (params) => (
+        <Switch checked={params.value} onChange={() => handleToggleRedeemed(params.id as number)} color="primary" />
+      ),
+    },
+  ];
 
   useEffect(() => {
     const fetchReferrals = async () => {
