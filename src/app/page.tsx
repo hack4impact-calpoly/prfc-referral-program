@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import ReferralForm from "@/components/ReferralForm/ReferralForm";
+import Header from "@/components/Header/Header";
 
 export default function Home() {
   return (
     <main>
-      <Navbar />
-      <h1>Home</h1>
+      <Header />
       <ReferralForm></ReferralForm>
     </main>
   );
