@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/database/db";
 import nodemailer from "nodemailer";
-import { info } from "console";
 
 export async function POST(req: NextRequest) {
   try {
     // Parse JSON body from the request
-    //const body = await req.json();
-
-    const t = await req.text();
-    const body = JSON.parse(t);
+    const body = await req.json();
 
     // Destructure required parameters from the request body
     const { member_name, member_email, prospects, referral_code } = body;
@@ -40,6 +36,11 @@ export async function POST(req: NextRequest) {
       if (!prospect.prospect_email) {
         return NextResponse.json({ message: `Prospect email is required at index ${i}.` }, { status: 400 });
       }
+
+      const emailSent = await sendEmail(prospect);
+      if (!emailSent) {
+        return NextResponse.json({ message: "Failed to send email." }, { status: 500 });
+      }
     }
 
     // Create a new referral entry in the database
@@ -57,13 +58,40 @@ export async function POST(req: NextRequest) {
       ),
     );
 
-    console.log("created referral");
-
     // Return the created referral entry as JSON response
     return NextResponse.json({ message: "Referrals created successfully!", referrals: newReferrals }, { status: 201 });
   } catch (err) {
     console.error("Error creating referrals:", err);
     return NextResponse.json({ message: "Error creating referrals." }, { status: 500 });
+  }
+}
+
+const transport = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 587,
+  secure: process.env.SMTP_SECURE === "true",
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
+
+async function sendEmail(prospect: string) {
+  const mail = {
+    from: process.env.FROM_EMAIL,
+    to: prospect,
+    subject: "You've Been Referred!",
+    text: `Hello! -nodemailer\n`,
+    html: `<p>Hello! -nodemailer</p>`,
+  };
+
+  try {
+    const sendAttempt = await transport.sendMail(mail);
+    console.log("Email sent successfully: ", sendAttempt.response);
+    return true;
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    return false;
   }
 }
 

@@ -38,6 +38,58 @@ export default function ReferralForm() {
     }
   }, [searchParams]);
 
+  // Function to handle form submission
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Clear previous error messages
+    setErrorMessage("");
+
+    // Check if all required fields for prospects are filled
+    for (let i = 0; i < prospects.length; i++) {
+      const prospect = prospects[i];
+      if (!prospect.email.trim() || !prospect.firstName.trim() || !prospect.lastName.trim()) {
+        setErrorMessage(`Please fill out all fields for Prospect ${i + 1}.`);
+        return; // Exit submission function if any required field is missing
+      }
+    }
+
+    // Create referral data object
+    const referralData = {
+      member_name: `${referrerFirstName} ${referrerLastName}`.trim(),
+      member_email: referrerEmail,
+      referral_code: referralCode,
+      prospects: prospects.map((prospect) => ({
+        prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
+        prospect_email: prospect.email,
+      })),
+    };
+
+    try {
+      // Send POST request to create a new referral
+      const response = await fetch("/api/referral", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(referralData),
+      });
+
+      if (response.ok) {
+        console.log("Referral created successfully");
+        // Reset form after successful submission
+        setProspects([{ email: "", firstName: "", lastName: "" }]);
+        setYourEmail("");
+      } else {
+        console.error("Failed to create referral");
+        setErrorMessage("Failed to submit the form. Please try again!");
+      }
+    } catch (error) {
+      console.error("Error creating referral:", error);
+      setErrorMessage("An error occured while submitting the form.");
+    }
+  };
+
   // Function to handle changes in prospect fields
   type ProspectField = "email" | "firstName" | "lastName";
 
@@ -57,34 +109,6 @@ export default function ReferralForm() {
     const newProspects = [...prospects];
     newProspects.splice(index, 1);
     setProspects(newProspects);
-  };
-
-  // Function to handle form submission
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const requestBody = {
-      member_name: "firstMember lastMember", // Hardcoded for testing
-      member_email: yourEmail,
-      prospect_name: `${prospects[0]?.firstName ?? ""} ${prospects[0]?.lastName ?? ""}`.trim(),
-      prospect_email: prospects[0]?.email ?? "",
-      referral_code: "testcode",
-    };
-
-    console.log("Submitting to API:", requestBody);
-
-    try {
-      const response = await fetch("/api/referral", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-      });
-
-      const result = await response.json();
-      console.log("API Response:", result);
-    } catch (error) {
-      console.error("Error submitting referral:", error);
-    }
   };
 
   return (
