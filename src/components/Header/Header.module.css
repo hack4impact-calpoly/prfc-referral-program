@@ -1,6 +1,21 @@
+/* Header.module.css */
 .header {
-  background: #ffffff;
-  padding-left: 27px;
-  padding-top: 64px;
-  padding-bottom: 54px;
+  width: 100%;
+  height: 80px; /* Adjust height as needed */
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align logo to the left */
+  padding: 0 30px; /* Adjust horizontal padding as needed */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 60px; /* Adjust logo size as needed */
+  width: auto;
 }
