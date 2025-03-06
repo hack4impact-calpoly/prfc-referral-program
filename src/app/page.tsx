@@ -16,11 +16,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroText}>
-          <div className={luckiestGuy.className}>
+          <div className={luckiestGuy.className} style={{ width: "500px" }}>
             <h1>Invite Others to Join the Co-Op!</h1>
             <h2>Refer a Family Member or Friend</h2>
           </div>
         </div>
+        {/* Referral Form */}
+        <ReferralForm />
         <div className={styles.heroImage}>
           <Image
             src="/produce.jpg"
@@ -31,9 +33,6 @@ export default function Home() {
           />
         </div>
       </section>
-
-      {/* Referral Form */}
-      <ReferralForm />
 
       {/* Why Refer & Referral History */}
       <section className={styles.referralSection}>
