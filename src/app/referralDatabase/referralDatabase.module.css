@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Komika Axis";
+  src: url("/fonts/KomikaAxis.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply to h1 */
+.pageTitle {
+  font-family: "Komika Axis", sans-serif;
+  font-size: 2rem;
+  color: #333;
+}
+
+.referralHistContainer {
+  background-color: #fadfc4;
+  padding: 20px 52px; /*top and bottom pad, left and right pad*/
+}
