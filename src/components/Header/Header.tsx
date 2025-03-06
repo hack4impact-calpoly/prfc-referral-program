@@ -1,10 +1,14 @@
-import Image from "next/image";
-import styles from "./Header.module.css";
+import React from "react";
+import styles from "./Header.module.css"; // Ensure this is the correct path
 
-export default function Header() {
+const Header: React.FC = () => {
   return (
     <header className={styles.header}>
-      <Image src="/assets/logo.png" alt="Dummy Logo" width={223} height={73} />
+      <div className={styles.logoContainer}>
+        <img src="/logo.jpg" alt="Logo" className={styles.logo} />
+      </div>
     </header>
   );
-}
+};
+
+export default Header;

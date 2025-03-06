@@ -1,0 +1,79 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #3e1c00; /* Dark brown */
+}
+
+.hero {
+  display: flex;
+  width: 100%;
+  background-color: #f5d7b5; /* Beige */
+  padding: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heroText {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+.heroText h1 {
+  font-size: 3rem; /* Adjust size as needed */
+}
+
+.heroText h2 {
+  font-size: 2rem; /* Adjust size as needed */
+}
+
+.heroImage {
+  display: flex;
+  justify-content: flex-end; /* Aligns child elements (the image) to the right */
+  width: 100%;
+}
+
+.heroImage img {
+  max-width: 100%; /* Ensures the image doesn't overflow */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.referralSection {
+  display: flex;
+  width: 100%;
+}
+
+.leftSection {
+  flex: 1;
+  background-color: #7a2f14;
+  padding: 2rem;
+  color: white;
+}
+
+.leftSection h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.rightSection {
+  flex: 2;
+  background-color: white;
+  padding: 2rem;
+}
+
+.referralHistory {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.referralHistory th,
+.referralHistory td {
+  border: 1px solid #3e1c00;
+  padding: 10px;
+  text-align: left;
+}
+
+.referralHistory th {
+  background-color: #f5d7b5;
+  color: #3e1c00;
+}
