@@ -72,7 +72,13 @@ export default function ReferralDataGrid() {
       headerName: "Redeemed",
       flex: 1,
       renderCell: (params) => (
-        <Switch checked={params.value} onChange={() => handleToggleRedeemed(params.id as number)} color="primary" />
+        <Switch
+          checked={params.value}
+          color="primary"
+          onChange={() => {
+            handleToggleRedeemed(params.id as number);
+          }}
+        />
       ),
     },
   ];
