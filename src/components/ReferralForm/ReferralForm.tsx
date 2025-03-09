@@ -2,8 +2,9 @@
 
 import styles from "./ReferralForm.module.css"; // Importing CSS module for styling
 
-import React, { useState, useEffect } from "react"; // Importing React and useState hook
+import { useState, useEffect } from "react"; // Importing React and useState hook
 import { useSearchParams } from "next/navigation"; // Importing useSearchParams from Next.js
+import Image from "next/image"; // Importing Image component from Next.js
 
 export default function ReferralForm() {
   // Retrieve search parameters from the URL
@@ -86,7 +87,7 @@ export default function ReferralForm() {
       }
     } catch (error) {
       console.error("Error creating referral:", error);
-      setErrorMessage("An error occured while submitting the form.");
+      setErrorMessage("An error occurred while submitting the form.");
     }
   };
 
@@ -113,18 +114,16 @@ export default function ReferralForm() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Email Submission Form</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div>
           <label htmlFor="yourEmail" className={styles.label}>
-            Your Email
           </label>
           <input
             id="yourEmail"
             type="email"
             value={yourEmail}
             onChange={(e) => setYourEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder="Enter Email Address"
             className={styles.input}
             readOnly
           />
@@ -132,21 +131,9 @@ export default function ReferralForm() {
         {prospects.map((prospect, index) => (
           <div key={index} className={styles.prospectContainer}>
             <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
-              ✖
+              <Image src="/trash.png" alt="Delete" width={18} height={18} />
             </button>
-            <label htmlFor={`prospectEmail${index}`} className={styles.label}>
-              Prospect Email
-            </label>
-            <input
-              id={`prospectEmail${index}`}
-              type="email"
-              value={prospect.email}
-              onChange={(e) => handleProspectChange(index, "email", e.target.value)}
-              placeholder="Enter prospect's email"
-              className={styles.input}
-            />
             <label htmlFor={`prospectFirstName${index}`} className={styles.label}>
-              Prospect First Name
             </label>
             <input
               id={`prospectFirstName${index}`}
@@ -157,7 +144,6 @@ export default function ReferralForm() {
               className={styles.input}
             />
             <label htmlFor={`prospectLastName${index}`} className={styles.label}>
-              Prospect Last Name
             </label>
             <input
               id={`prospectLastName${index}`}
@@ -167,10 +153,20 @@ export default function ReferralForm() {
               placeholder="Enter prospect's last name"
               className={styles.input}
             />
+            <label htmlFor={`prospectEmail${index}`} className={styles.label}>
+            </label>
+            <input
+              id={`prospectEmail${index}`}
+              type="email"
+              value={prospect.email}
+              onChange={(e) => handleProspectChange(index, "email", e.target.value)}
+              placeholder="Enter prospect's email"
+              className={styles.input}
+            />
           </div>
         ))}
-        <button type="button" onClick={addProspect} className={styles.button}>
-          Add Another Prospect
+        <button type="button" onClick={addProspect} className={styles.plusBox}>
+          +
         </button>
         {/* Display error message if validation fails */}
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
@@ -180,7 +176,7 @@ export default function ReferralForm() {
         <input type="hidden" name="referrerLastName" value={referrerLastName} />
         <input type="hidden" name="referralCode" value={referralCode} />
         <button type="submit" className={styles.button}>
-          Submit
+          Invite
         </button>
       </form>
     </div>

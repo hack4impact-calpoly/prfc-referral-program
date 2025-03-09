@@ -19,16 +19,16 @@ export default function Home() {
             <h1>Invite Others to Join the Co-Op!</h1>
             <h2>Refer a Family Member or Friend</h2>
           </div>
+          {/* Referral Form */}
+          <ReferralForm />
         </div>
-        {/* Referral Form */}
-        <ReferralForm />
         <div className={styles.heroImage}>
           <Image
             src="/produce.jpg"
             alt="Fresh Produce"
-            width={500} // set the desired width
-            height={500} // set the desired height
-            layout="intrinsic" // use intrinsic layout for fixed size images
+            width={500} 
+            height={500} 
+            layout="intrinsic" 
           />
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.rightSection}>
-          <h2>Referral History</h2>
+          <h2 className={`${luckiestGuy.className} ${styles.referralHistoryTitle}`}>Referral History</h2>
         </div>
       </section>
     </main>
