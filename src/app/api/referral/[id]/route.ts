@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/database/db";
 
-export async function PUT(req: NextRequest, context: { params: { id: string } }) {
+export async function PUT(req: NextRequest, context: { params: { id?: string } }) {
   try {
-    console.log(`inside put api`);
-    const referralId = parseInt(context.params.id, 10);
-    console.log(`referralId: ${referralId}`);
+    const resolvedParams = await context.params; // Await the params
+    if (!resolvedParams?.id) {
+      return NextResponse.json({ message: "Invalid referral ID." }, { status: 400 });
+    }
+    const referralId = parseInt(resolvedParams.id, 10);
     if (isNaN(referralId)) {
       return NextResponse.json({ message: "Invalid referral ID." }, { status: 400 });
     }
