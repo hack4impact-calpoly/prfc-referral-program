@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Komika Axis";
+  src: url("/fonts/KomikaAxis.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -20,11 +27,15 @@
 }
 
 .heroText h1 {
+  font-family: "Komika Axis", sans-serif;
   font-size: 3rem; /* Adjust size as needed */
+  color: #831002;
 }
 
 .heroText h2 {
+  font-family: "Komika Axis", sans-serif;
   font-size: 2rem; /* Adjust size as needed */
+  color: #523018;
 }
 
 .heroImage {
@@ -46,7 +57,7 @@
 
 .leftSection {
   flex: 1;
-  background-color: #7a2f14;
+  background-color: #831002;
   padding: 2rem;
   color: white;
 }
@@ -54,6 +65,7 @@
 .leftSection h2 {
   font-size: 1.8rem;
   font-weight: bold;
+  font-family: "Komika Axis", sans-serif;
 }
 
 .rightSection {
@@ -65,6 +77,11 @@
 .referralHistory {
   width: 100%;
   border-collapse: collapse;
+}
+
+.referralHistoryTitle {
+  font-family: "Komika Axis", sans-serif;
+  color: #831002;
 }
 
 .referralHistory th,
