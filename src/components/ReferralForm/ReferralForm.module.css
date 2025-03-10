@@ -1,7 +1,7 @@
 /* Container styling */
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   padding: 2rem;
   border: 1px solid #f5d7b5;
   border-radius: 1rem;
@@ -26,8 +26,16 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; /* Reduced gap between input fields */
+  gap: 1.25rem;
   width: 100%;
+}
+
+/* Input group layout */
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem; /* Reduced gap between input fields */
+  align-items: flex-start; /* Align items to the left */
 }
 
 /* Label styling */
@@ -100,7 +108,7 @@
 
 /* Spacing between sections */
 .form > div {
-  margin-bottom: 0.5rem; /* Reduced gap between sections */
+  margin-bottom: 1rem;
 }
 
 /* Delete button */
@@ -115,6 +123,12 @@
   flex-direction: column;
   gap: 0.5rem; /* Reduced gap between input fields */
   align-items: flex-start; /* Align items to the left */
+}
+
+/* Scrollable prospect list */
+.prospectList {
+  max-height: 200px; /* Adjust height as needed */
+  overflow-y: auto;
 }
 
 .crossButton {

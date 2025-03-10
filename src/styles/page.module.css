@@ -31,6 +31,7 @@
   display: flex;
   justify-content: flex-end; /* Aligns child elements (the image) to the right */
   width: 100%;
+  height: 100%; /* Ensure the image container takes the full height */
 }
 
 .heroImage img {
@@ -77,4 +78,3 @@
   background-color: #f5d7b5;
   color: #3e1c00;
 }
-
