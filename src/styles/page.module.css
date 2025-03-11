@@ -1,36 +1,58 @@
+@font-face {
+  font-family: "Komika Axis";
+  src: url("/fonts/KomikaAxis.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #3e1c00; /* Dark brown */
+  overflow-x: hidden;
 }
 
 .hero {
   display: flex;
   width: 100%;
   background-color: #f5d7b5; /* Beige */
-  padding: 2rem;
-  align-items: center;
-  justify-content: space-between;
+}
+
+.heroTitle {
+  padding-bottom: 5vh;
+  padding-right: 2.5vh;
 }
 
 .heroText {
-  flex: 1;
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .heroText h1 {
-  font-size: 3rem; /* Adjust size as needed */
+  font-family: "Komika Axis", sans-serif;
+  font-size: 2.5rem; /* Adjust size as needed */
+  color: #831002;
+  white-space: nowrap;
 }
 
 .heroText h2 {
+  font-family: "Komika Axis", sans-serif;
   font-size: 2rem; /* Adjust size as needed */
+  color: #523018;
 }
 
 .heroImage {
   display: flex;
   justify-content: flex-end; /* Aligns child elements (the image) to the right */
   width: 100%;
+  height: 100%; /* Ensure the image container takes the full height */
 }
 
 .heroImage img {
@@ -45,14 +67,17 @@
 
 .leftSection {
   flex: 1;
-  background-color: #7a2f14;
-  padding: 2rem;
+  background-color: #831002;
+  padding: 3rem;
   color: white;
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
 }
 
 .leftSection h2 {
   font-size: 1.8rem;
   font-weight: bold;
+  font-family: "Komika Axis", sans-serif;
 }
 
 .rightSection {
@@ -64,6 +89,11 @@
 .referralHistory {
   width: 100%;
   border-collapse: collapse;
+}
+
+.referralHistoryTitle {
+  font-family: "Komika Axis", sans-serif;
+  color: #831002;
 }
 
 .referralHistory th,
