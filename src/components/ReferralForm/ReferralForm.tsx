@@ -116,14 +116,13 @@ export default function ReferralForm() {
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>
-          <label htmlFor="yourEmail" className={styles.label}>
-          </label>
+          <label htmlFor="yourEmail" className={styles.label}></label>
           <input
             id="yourEmail"
             type="email"
             value={yourEmail}
             onChange={(e) => setYourEmail(e.target.value)}
-            placeholder="Enter Email Address"
+            placeholder="Referrer's Email Address"
             className={styles.input}
             readOnly
           />
@@ -131,47 +130,44 @@ export default function ReferralForm() {
         <div className={styles.prospectList}>
           {prospects.map((prospect, index) => (
             <div key={index} className={styles.prospectContainer}>
-              <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
-                <Image src="/trash.png" alt="Delete" width={18} height={18} />
-              </button>
-              <label htmlFor={`prospectFirstName${index}`} className={styles.label}>
-              </label>
+              <label htmlFor={`prospectFirstName${index}`} className={styles.label}></label>
               <input
                 id={`prospectFirstName${index}`}
                 type="text"
                 value={prospect.firstName}
                 onChange={(e) => handleProspectChange(index, "firstName", e.target.value)}
-                placeholder="Enter prospect's first name"
+                placeholder="Prospect's First Name"
                 className={styles.input}
               />
-              <label htmlFor={`prospectLastName${index}`} className={styles.label}>
-              </label>
+              <label htmlFor={`prospectLastName${index}`} className={styles.label}></label>
               <input
                 id={`prospectLastName${index}`}
                 type="text"
                 value={prospect.lastName}
                 onChange={(e) => handleProspectChange(index, "lastName", e.target.value)}
-                placeholder="Enter prospect's last name"
+                placeholder="Prospect's Last Name"
                 className={styles.input}
               />
-              <label htmlFor={`prospectEmail${index}`} className={styles.label}>
-              </label>
+              <label htmlFor={`prospectEmail${index}`} className={styles.label}></label>
               <input
                 id={`prospectEmail${index}`}
                 type="email"
                 value={prospect.email}
                 onChange={(e) => handleProspectChange(index, "email", e.target.value)}
-                placeholder="Enter prospect's email"
+                placeholder="Prospect's Email Address"
                 className={styles.input}
               />
-              <button type="submit" className={styles.button}>
-                Invite
+              <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
+                <Image src="/trash.png" alt="Delete" width={18} height={18} />
               </button>
             </div>
           ))}
         </div>
         <button type="button" onClick={addProspect} className={styles.plusBox}>
           +
+        </button>
+        <button type="submit" className={styles.button}>
+          Invite
         </button>
         {/* Display error message if validation fails */}
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}

@@ -12,29 +12,26 @@
   font-style: normal;
 }
 
-
-
-
-
-
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #3e1c00; /* Dark brown */
+  overflow-x: hidden;
 }
 
 .hero {
   display: flex;
   width: 100%;
   background-color: #f5d7b5; /* Beige */
-  padding: 2rem;
-  align-items: center;
-  justify-content: space-between;
+}
+
+.heroTitle {
+  padding-bottom: 5vh;
+  padding-right: 2.5vh;
 }
 
 .heroText {
-  flex: 1;
   padding-left: 1rem;
 }
 
@@ -71,9 +68,10 @@
 .leftSection {
   flex: 1;
   background-color: #831002;
-  padding: 2rem;
+  padding: 3rem;
   color: white;
   font-family: "Montserrat", sans-serif;
+  height: 100%;
 }
 
 .leftSection h2 {
