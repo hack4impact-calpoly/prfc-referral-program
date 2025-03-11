@@ -26,9 +26,9 @@ export default function Home() {
       <section className={styles.referralSection}>
         <div className={styles.leftSection}>
           <h2>Why Should I Refer?</h2>
-          <p>By referring others, you can help our community reach its goal of hitting ___ members!</p>
+          <p>Each new member brings fresh ideas, helps us offer more events, and keeps our shelves stocked with an even wider variety of products.</p>
           <h2>Prizes</h2>
-          <p>For every referral, you gain one __________.</p>
+          <p>For each new member you bring in, you’ll earn points to redeem special prizes. Past prizes have included bottles of wine, engraved bricks, and more.</p>
         </div>
         <div className={styles.rightSection}>
           <h2 className={styles.referralHistoryTitle}>Referral History</h2>

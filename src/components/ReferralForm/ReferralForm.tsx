@@ -127,9 +127,6 @@ export default function ReferralForm() {
             className={styles.input}
             readOnly
           />
-          <button type="submit" className={styles.button}>
-            Invite
-          </button>
         </div>
         <div className={styles.prospectList}>
           {prospects.map((prospect, index) => (
@@ -167,6 +164,9 @@ export default function ReferralForm() {
                 placeholder="Enter prospect's email"
                 className={styles.input}
               />
+              <button type="submit" className={styles.button}>
+                Invite
+              </button>
             </div>
           ))}
         </div>

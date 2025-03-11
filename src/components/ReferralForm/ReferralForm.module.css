@@ -1,16 +1,16 @@
 /* Container styling */
 .container {
   width: 100%;
-  max-width: 500px;
-  padding: 2rem;
-  border: 1px solid #f5d7b5;
+  max-width: 800px; /* Adjusted max-width to fit more input fields */
+  padding: 0.2rem;
+  border: none;
   border-radius: 1rem;
   background-color: #f5d7b5;
   box-sizing: border-box; /* Ensure padding is included in the container size */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align items to the start */
 }
 
 /* Title styling */
@@ -36,6 +36,7 @@
   flex-direction: row;
   gap: 0.5rem; /* Reduced gap between input fields */
   align-items: flex-start; /* Align items to the left */
+  margin-left: -0.4rem; /* Remove left margin */
 }
 
 /* Label styling */
@@ -49,7 +50,7 @@
 /* Input field styling */
 .input {
   display: flex;
-  width: 294px;
+  width: 150px; /* Adjusted width to fit more input fields */
   height: 38px;
   padding: 12px 18px;
   align-items: center;
@@ -114,15 +115,16 @@
 /* Delete button */
 .prospectContainer {
   position: relative;
-  padding: 10px;
-  border: 1px solid #f5d7b5;
-  border-radius: 8px;
+  padding: 1px;
+  border: none;
+  border-radius: 0px;
   margin-bottom: 10px;
   background-color: #f5d7b5;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* Reduced gap between input fields */
-  align-items: flex-start; /* Align items to the left */
+  flex-direction: row; /* Changed to row to align input fields horizontally */
+  gap: 0.2rem; /* Reduced gap between input fields */
+  align-items: center; /* Align items to the center */
+  margin-left: -0.5rem; /* Remove left margin */
 }
 
 /* Scrollable prospect list */
@@ -132,14 +134,13 @@
 }
 
 .crossButton {
-  position: absolute;
-  top: 5px;
-  right: 10px;
   background: none;
   border: none;
   font-size: 18px;
   color: red;
   cursor: pointer;
+  margin-right: 0.5rem; /* Add margin to the right of the delete button */
+  align-self: flex-start; /* Align the delete button to the start */
 }
 
 .crossButton:hover {
