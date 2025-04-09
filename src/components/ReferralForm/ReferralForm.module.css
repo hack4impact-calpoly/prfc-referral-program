@@ -94,8 +94,8 @@
 /* Plus sign box styling */
 .plusBox {
   display: flex;
-  width: 708px;
-  height: 33px;
+  width: auto;
+  height: 2rem;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
