@@ -29,7 +29,6 @@
   background-color: #f5d7b5;
   justify-content: space-between;
   gap: 2rem;
-  padding: 2rem 1rem;
   box-sizing: border-box;
 }
 
@@ -38,6 +37,7 @@
 }
 
 .heroText {
+  padding: 2rem 1rem;
   flex: 1 1 400px;
   min-width: 300px;
 }
