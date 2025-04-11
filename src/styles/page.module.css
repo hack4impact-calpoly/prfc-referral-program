@@ -44,19 +44,19 @@
 
 .heroText h1 {
   font-family: "Komika Axis", sans-serif;
-  font-size: 2.5vw;
+  font-size: 1.9rem;
   color: #831002;
   margin-bottom: 0.5rem;
 }
 
 .heroText h2 {
   font-family: "Komika Axis", sans-serif;
-  font-size: 2vw;
+  font-size: 1.5rem;
   color: #523018;
 }
 
 .heroImage {
-  flex: 1 1 400px;
+  flex: 1 1 710px;
   display: flex;
   justify-content: center;
   align-items: center;
