@@ -3,6 +3,7 @@
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
+import dayjs from "dayjs"; // For date
 
 const CustomToolbar = () => {
   return (
@@ -61,7 +62,16 @@ export default function ReferralDataGrid() {
 
   // Fields for data
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "created_at",
+      headerName: "Date",
+      flex: 1,
+      valueGetter: (params: any) => {
+        const date = dayjs(params.value);
+        return date.isValid() ? date.format("MM/DD/YYYY HH:mm:ss") : "Invalid date";
+      },
+      sortable: true,
+    },
     { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
     { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
     { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
