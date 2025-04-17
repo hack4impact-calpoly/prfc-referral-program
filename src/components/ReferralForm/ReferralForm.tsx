@@ -1,29 +1,23 @@
-"use client"; // Marks this file as a client component
+"use client";
 
-import styles from "./ReferralForm.module.css"; // Importing CSS module for styling
-
-import { useState, useEffect } from "react"; // Importing React and useState hook
-import { useSearchParams } from "next/navigation"; // Importing useSearchParams from Next.js
-import Image from "next/image"; // Importing Image component from Next.js
+import styles from "./ReferralForm.module.css";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { calculateChecksum } from "@/utils/checksum";
 
 export default function ReferralForm() {
-  // Retrieve search parameters from the URL
   const searchParams = useSearchParams();
-  // State to manage the user's email
   const [yourEmail, setYourEmail] = useState("");
-  // State to manage the list of prospects
   const [prospects, setProspects] = useState([{ email: "", firstName: "", lastName: "" }]);
-  // State to manage hidden fields
   const [referrerEmail, setReferrerEmail] = useState("");
   const [referrerFirstName, setReferrerFirstName] = useState("");
   const [referrerLastName, setReferrerLastName] = useState("");
   const [referralCode, setReferralCode] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (!searchParams) return;
-    // Extract data from URL search parameters
     const fullName = searchParams.get("nm") || "".trim();
     const email = searchParams.get("em") || "";
     const code = searchParams.get("ref") || "";
@@ -39,27 +33,39 @@ export default function ReferralForm() {
     }
   }, [searchParams]);
 
-  // Function to handle form submission
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
-    // Clear previous error messages
     setErrorMessage("");
 
-    // Check if all required fields for prospects are filled
     for (let i = 0; i < prospects.length; i++) {
       const prospect = prospects[i];
       if (!prospect.email.trim() || !prospect.firstName.trim() || !prospect.lastName.trim()) {
         setErrorMessage(`Please fill out all fields for Prospect ${i + 1}.`);
-        return; // Exit submission function if any required field is missing
+        return;
       }
     }
 
-    // Create referral data object
+    const em = referrerEmail;
+    const nm = `${referrerFirstName} ${referrerLastName}`;
+    const ref = referralCode;
+    const cs = searchParams.get("cs");
+
+    if (!cs) {
+      setErrorMessage("Invalid URL: Missing checksum.");
+      return;
+    }
+
+    const calculatedChecksum = calculateChecksum(`${em}${nm}${ref}`);
+
+    if (calculatedChecksum !== cs) {
+      setErrorMessage("Invalid URL: Checksum mismatch.");
+      return;
+    }
+
     const referralData = {
-      member_name: `${referrerFirstName} ${referrerLastName}`.trim(),
-      member_email: referrerEmail,
-      referral_code: referralCode,
+      member_name: nm.trim(),
+      member_email: em,
+      referral_code: ref,
       prospects: prospects.map((prospect) => ({
         prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
         prospect_email: prospect.email,
@@ -67,7 +73,6 @@ export default function ReferralForm() {
     };
 
     try {
-      // Send POST request to create a new referral
       const response = await fetch("/api/referral", {
         method: "POST",
         headers: {
@@ -78,34 +83,26 @@ export default function ReferralForm() {
 
       if (response.ok) {
         console.log("Referral created successfully");
-        // Reset form after successful submission
         setProspects([{ email: "", firstName: "", lastName: "" }]);
         setYourEmail("");
       } else {
-        console.error("Failed to create referral");
         setErrorMessage("Failed to submit the form. Please try again!");
       }
     } catch (error) {
-      console.error("Error creating referral:", error);
       setErrorMessage("An error occurred while submitting the form.");
     }
   };
 
-  // Function to handle changes in prospect fields
-  type ProspectField = "email" | "firstName" | "lastName";
-
-  const handleProspectChange = (index: number, field: ProspectField, value: string) => {
+  const handleProspectChange = (index: number, field: "email" | "firstName" | "lastName", value: string) => {
     const newProspects = [...prospects];
     newProspects[index][field] = value;
     setProspects(newProspects);
   };
 
-  // Function to add a new prospect to the list
   const addProspect = () => {
     setProspects([...prospects, { email: "", firstName: "", lastName: "" }]);
   };
 
-  // Function to delete a prospect from the list
   const deleteProspect = (index: number) => {
     const newProspects = [...prospects];
     newProspects.splice(index, 1);
@@ -169,9 +166,7 @@ export default function ReferralForm() {
         <button type="submit" className={styles.button}>
           Invite
         </button>
-        {/* Display error message if validation fails */}
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-        {/* Hidden fields for referrer details and referral code */}
         <input type="hidden" name="referrerEmail" value={referrerEmail} />
         <input type="hidden" name="referrerFirstName" value={referrerFirstName} />
         <input type="hidden" name="referrerLastName" value={referrerLastName} />
