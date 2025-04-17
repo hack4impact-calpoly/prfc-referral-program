@@ -121,6 +121,7 @@ export default function ReferralDataGrid() {
             showQuickFilter: true,
           },
         }}
+        getRowClassName={(params) => (params.indexRelativeToCurrentPage % 2 === 0 ? "even-row" : "odd-row")}
         sx={{
           border: "2px solid #968676",
           borderRadius: "12px",
@@ -136,13 +137,14 @@ export default function ReferralDataGrid() {
             fontWeight: "bold", // Force the title text to be bold
             textDecoration: "underline",
           },
+          "& .even-row": {
+            backgroundColor: "#D9D9D9",
+          },
+          "& .odd-row": {
+            backgroundColor: "#D9D9D9",
+          },
           "& .MuiDataGrid-row": {
-            "&:nth-of-type(odd)": {
-              backgroundColor: "#D9D9D9", // Odd row background color
-            },
-            "&:nth-of-type(even)": {
-              backgroundColor: "#ffffff", // Even row background color
-            },
+            transition: "none !important",
           },
         }}
       />
