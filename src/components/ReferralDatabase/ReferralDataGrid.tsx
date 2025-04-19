@@ -138,7 +138,7 @@ export default function ReferralDataGrid() {
             textDecoration: "underline",
           },
           "& .even-row": {
-            backgroundColor: "#D9D9D9",
+            backgroundColor: "#ffffff",
           },
           "& .odd-row": {
             backgroundColor: "#D9D9D9",
