@@ -32,15 +32,17 @@
 }
 
 .hero {
-  flex: 1;
   display: flex;
-  flex-wrap: wrap; /* Allows stacking when space runs out */
-  align-items: stretch; /* Ensures children fill vertically */
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
   width: 100%;
   background-color: #f5d7b5;
-  justify-content: space-between;
-  gap: 2rem;
   box-sizing: border-box;
+  padding-left: 5vw; /* keep only left padding */
+  padding-right: 0; /* remove right padding */
+  margin: 0;
+  gap: 0; /* remove the gap so there's no forced spacing */
 }
 
 .heroTitle {
@@ -73,9 +75,10 @@
 .heroImage {
   flex: 1 1 710px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  min-height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .heroImage img {
