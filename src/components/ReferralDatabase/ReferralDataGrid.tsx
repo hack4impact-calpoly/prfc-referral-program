@@ -109,7 +109,13 @@ export default function ReferralDataGrid() {
   }, []);
 
   return (
-    <div style={{ height: 572, width: "100%" }}>
+    <div
+      style={{
+        height: "calc(100vh - 12rem", // Subtract the header height from the full screen height
+        width: "100%",
+        margin: "0 auto", //Center horizontally
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
