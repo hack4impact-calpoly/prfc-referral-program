@@ -4,7 +4,9 @@ import styles from "./Header.module.css";
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Image src="/assets/logo.png" alt="Dummy Logo" width={223} height={73} />
+      <div className={styles.logoWrapper}>
+        <Image src="/assets/logo.png" alt="Paso Logo" fill className={styles.logoImage} />
+      </div>
     </header>
   );
 }

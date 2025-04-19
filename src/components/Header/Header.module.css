@@ -1,6 +1,17 @@
 .header {
   background: #ffffff;
-  padding-left: 27px;
-  padding-top: 64px;
-  padding-bottom: 54px;
+  padding-left: 2rem;
+  padding-top: 4rem;
+  padding-bottom: 3rem;
+}
+
+.logoWrapper {
+  position: relative; /* come together with fill */
+  width: clamp(8rem, 20vw, 14rem); /* Responsive scaling to make it not too small or too large */
+  aspect-ratio: 223 / 73; /* Keeps the logo's aspect ratio from getting squished */
+  height: auto;
+}
+
+.logoImage {
+  object-fit: contain;
 }
