@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/database/db";
 
-export async function PUT(req: NextRequest, context: { params: { id?: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const resolvedParams = await context.params; // Await the params
+    const resolvedParams = await params; // Await the params
     if (!resolvedParams?.id) {
       return NextResponse.json({ message: "Invalid referral ID." }, { status: 400 });
     }
