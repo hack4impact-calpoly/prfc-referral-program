@@ -16,6 +16,9 @@ export default function ReferralForm() {
   const [referralCode, setReferralCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // State to manage confirmation of Referral Submission
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
   useEffect(() => {
     if (!searchParams) return;
     const fullName = searchParams.get("nm") || "".trim();
@@ -85,6 +88,7 @@ export default function ReferralForm() {
         console.log("Referral created successfully");
         setProspects([{ email: "", firstName: "", lastName: "" }]);
         setYourEmail("");
+        setShowConfirmation(true); // Show confirmation popup
       } else {
         setErrorMessage("Failed to submit the form. Please try again!");
       }
@@ -111,6 +115,16 @@ export default function ReferralForm() {
 
   return (
     <div className={styles.container}>
+      {showConfirmation && (
+        <div className={styles.confirmationPopup}>
+          <div className={styles.confirmationContent}>
+            <p>🎉 Referral submitted successfully!</p>
+            <button onClick={() => setShowConfirmation(false)} className={styles.closeButton}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="yourEmail" className={styles.label}></label>

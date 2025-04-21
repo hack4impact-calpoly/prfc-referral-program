@@ -2,10 +2,9 @@
 .container {
   width: 100%;
   max-width: 800px; /* Adjusted max-width to fit more input fields */
-  padding: 0.2rem;
+  /* padding: 0.2rem; */
   border: none;
   border-radius: 1rem;
-  background-color: #f5d7b5;
   box-sizing: border-box; /* Ensure padding is included in the container size */
   display: flex;
   flex-direction: column;
@@ -94,8 +93,8 @@
 /* Plus sign box styling */
 .plusBox {
   display: flex;
-  width: 708px;
-  height: 33px;
+  width: auto;
+  height: 2rem;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
@@ -109,11 +108,10 @@
 /* Delete button */
 .prospectContainer {
   position: relative;
-  padding: 1px;
+  /* padding: 1px; */
   border: none;
   border-radius: 0px;
   margin-bottom: 1vh;
-  background-color: #f5d7b5;
   display: flex;
   flex-direction: row; /* Changed to row to align input fields horizontally */
   gap: 0.2rem; /* Reduced gap between input fields */
