@@ -1,17 +1,24 @@
+/* Header.module.css */
 .header {
-  background: #ffffff;
-  padding-left: 2rem;
-  padding-top: 4rem;
-  padding-bottom: 3rem;
+  width: 100%;
+  height: 8vw; /* Adjust height as needed */
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align logo to the left */
+  /* padding: 0 30px; Adjust horizontal padding as needed */
+  padding: 5vh;
+  padding-bottom: 5vh;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional, for a subtle shadow */
 }
 
-.logoWrapper {
-  position: relative; /* come together with fill */
-  width: clamp(8rem, 20vw, 14rem); /* Responsive scaling to make it not too small or too large */
-  aspect-ratio: 223 / 73; /* Keeps the logo's aspect ratio from getting squished */
-  height: auto;
+.logoContainer {
+  display: flex;
+  align-items: center;
 }
 
-.logoImage {
-  object-fit: contain;
+.logo {
+  height: 4vw;
+  min-height: 60px; /* Adjust logo size as needed */
+  width: auto;
 }

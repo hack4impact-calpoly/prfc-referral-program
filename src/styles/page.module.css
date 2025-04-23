@@ -1,0 +1,211 @@
+@font-face {
+  font-family: "Komika Axis";
+  src: url("/fonts/KomikaAxis.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.container {
+  height: 100vh; /* Take up the full height of the screen */
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: #3e1c00;
+  overflow-x: hidden;
+  width: auto;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #fadfc4;
+  box-sizing: border-box;
+  padding-left: 2rem; /* keep only left padding */
+  padding-right: 2rem; /* remove right padding */
+  margin: 0;
+  gap: 0; /* remove the gap so there's no forced spacing */
+}
+
+.heroTitle {
+  margin-bottom: 2rem;
+}
+
+.heroText {
+  padding: 2rem 1rem;
+  flex: 1 1 400px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.heroText h1 {
+  font-family: "Komika Axis", sans-serif;
+  font-size: 1.9rem;
+  color: #831002;
+  margin-bottom: 0.5rem;
+}
+
+.heroText h2 {
+  font-family: "Komika Axis", sans-serif;
+  font-size: 1.5rem;
+  color: #523018;
+}
+
+.heroImage {
+  flex: 1 1 600px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+
+.heroImage img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+}
+
+.referralSection {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Ensures children fill vertically */
+  width: 100%;
+  box-sizing: border-box;
+  gap: 2rem;
+}
+
+.leftSection {
+  flex: 1 1 300px;
+  background-color: #831002;
+  color: white;
+  padding: 2rem;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.leftSection h2 {
+  font-size: 1.8rem;
+  font-family: "Komika Axis", sans-serif;
+}
+
+.rightSection {
+  flex: 2 1 400px;
+  background-color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.referralHistory {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.referralHistoryTitle {
+  font-family: "Komika Axis", sans-serif;
+  color: #831002;
+}
+
+.referralHistory th,
+.referralHistory td {
+  border: 1px solid #3e1c00;
+  padding: 10px;
+  text-align: left;
+}
+
+.referralHistory th {
+  background-color: #f5d7b5;
+  color: #3e1c00;
+}
+
+.section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmationPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmationContent {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.closeButton {
+  margin-top: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* when it gets bigger than mobile view */
+@media (min-width: 1065px) {
+  .hero {
+    padding-right: 0;
+  }
+  .heroImage {
+    padding-left: 8rem;
+  }
+}
+
+/* Optional: Responsive tweaks for huge screens */
+@media (min-width: 1800px) {
+  .heroText h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroText h2 {
+    font-size: 2rem;
+  }
+
+  .leftSection,
+  .rightSection {
+    padding: 3rem;
+  }
+}

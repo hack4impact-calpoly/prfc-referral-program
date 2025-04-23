@@ -1,13 +1,15 @@
 /* Container styling */
 .container {
-  max-width: 32rem;
-  margin: 3rem auto;
-  padding: 2rem;
-  border: 1px solid #e2e8f0;
+  width: 100%;
+  max-width: 800px; /* Adjusted max-width to fit more input fields */
+  /* padding: 0.2rem; */
+  border: none;
   border-radius: 1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background-color: #f9fafb;
   box-sizing: border-box; /* Ensure padding is included in the container size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the start */
 }
 
 /* Title styling */
@@ -24,6 +26,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
+}
+
+/* Input group layout */
+.inputGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem; /* Reduced gap between input fields */
+  align-items: flex-start; /* Align items to the left */
+  margin-left: -0.4rem; /* Remove left margin */
 }
 
 /* Label styling */
@@ -36,38 +48,32 @@
 
 /* Input field styling */
 .input {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  margin-top: 0.5rem; /* Space between label and input */
-  margin-bottom: 1rem; /* Increased space between input fields */
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  background-color: #ffffff;
-  color: #111827;
-  transition:
-    box-shadow 0.2s,
-    border-color 0.2s;
+  display: flex;
+  width: 30%; /* Adjusted width to fit more input fields */
+  padding: 12px 18px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 2px solid var(--brown, #523018);
+  background: #fff;
   box-sizing: border-box;
-}
-
-/* Input field focus styling */
-.input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
 }
 
 /* Button styling */
 .button {
-  padding: 0.75rem 1rem;
-  background-color: #2563eb;
+  display: flex;
+  width: 80px;
+  height: 36px;
+  padding: 12px 18px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--red, #831002);
   color: #ffffff;
   border: none;
-  border-radius: 0.5rem;
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   transition:
     background-color 0.2s,
@@ -77,37 +83,59 @@
 
 /* Button hover and active effects */
 .button:hover {
-  background-color: #1d4ed8;
+  background-color: #831002;
 }
 
 .button:active {
   transform: scale(0.98);
 }
 
-/* Spacing between sections */
-.form > div {
-  margin-bottom: 1rem;
+/* Plus sign box styling */
+.plusBox {
+  display: flex;
+  width: auto;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--brown, #523018);
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 /* Delete button */
 .prospectContainer {
   position: relative;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9;
+  /* padding: 1px; */
+  border: none;
+  border-radius: 0px;
+  margin-bottom: 1vh;
+  display: flex;
+  flex-direction: row; /* Changed to row to align input fields horizontally */
+  gap: 0.2rem; /* Reduced gap between input fields */
+  align-items: center; /* Align items to the center */
+  /*margin-left: -0.5rem; /* Remove left margin */
+  box-sizing: border-box;
+}
+
+/* Scrollable prospect list */
+.prospectList {
+  height: 15vh;
+  max-height: 15vh; /* Adjust height as needed */
+  overflow-y: auto;
 }
 
 .crossButton {
-  position: absolute;
-  top: 5px;
-  right: 10px;
   background: none;
   border: none;
   font-size: 18px;
   color: red;
   cursor: pointer;
+  margin-top: 0.5rem; /* Add margin to the top of the delete button */
+  margin-right: 0.5rem; /* Add margin to the right of the delete button */
+  align-self: flex-start; /* Align the delete button to the start */
 }
 
 .crossButton:hover {
