@@ -3,6 +3,7 @@
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
+import dayjs from "dayjs"; // For date
 
 const CustomToolbar = () => {
   return (
@@ -61,7 +62,16 @@ export default function ReferralDataGrid() {
 
   // Fields for data
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "created_at",
+      headerName: "Date",
+      flex: 1,
+      valueGetter: (params: any) => {
+        const date = dayjs(params.value);
+        return date.isValid() ? date.format("MM/DD/YYYY HH:mm:ss") : "Invalid date";
+      },
+      sortable: true,
+    },
     { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
     { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
     { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
@@ -99,7 +109,13 @@ export default function ReferralDataGrid() {
   }, []);
 
   return (
-    <div style={{ height: 572, width: "100%" }}>
+    <div
+      style={{
+        height: "calc(100vh - 12rem", // Subtract the header height from the full screen height
+        width: "100%",
+        margin: "0 auto", //Center horizontally
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
@@ -111,6 +127,7 @@ export default function ReferralDataGrid() {
             showQuickFilter: true,
           },
         }}
+        getRowClassName={(params) => (params.indexRelativeToCurrentPage % 2 === 0 ? "even-row" : "odd-row")}
         sx={{
           border: "2px solid #968676",
           borderRadius: "12px",
@@ -126,13 +143,14 @@ export default function ReferralDataGrid() {
             fontWeight: "bold", // Force the title text to be bold
             textDecoration: "underline",
           },
+          "& .even-row": {
+            backgroundColor: "#ffffff",
+          },
+          "& .odd-row": {
+            backgroundColor: "#D9D9D9",
+          },
           "& .MuiDataGrid-row": {
-            "&:nth-of-type(odd)": {
-              backgroundColor: "#D9D9D9", // Odd row background color
-            },
-            "&:nth-of-type(even)": {
-              backgroundColor: "#ffffff", // Even row background color
-            },
+            transition: "none !important",
           },
         }}
       />

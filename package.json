@@ -23,6 +23,7 @@
     "@mui/material": "^6.4.3",
     "@mui/x-data-grid": "^7.26.0",
     "@prisma/client": "^6.4.1",
+    "dayjs": "^1.11.13",
     "mongoose": "^8",
     "next": "^15.2.1",
     "nodemailer": "^6.10.0",
