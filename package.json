@@ -25,6 +25,7 @@
     "@prisma/client": "^6.4.1",
     "mongoose": "^8",
     "next": "^15.2.1",
+    "next-test-api-route-handler": "^4.0.16",
     "nodemailer": "^6.10.0",
     "react": "^18",
     "react-dom": "^18"

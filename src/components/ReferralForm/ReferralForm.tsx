@@ -4,7 +4,6 @@ import styles from "./ReferralForm.module.css";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { calculateChecksum } from "@/utils/checksum";
 
 export default function ReferralForm() {
   const searchParams = useSearchParams();
@@ -37,6 +36,7 @@ export default function ReferralForm() {
     event.preventDefault();
     setErrorMessage("");
 
+    // Validate prospects
     for (let i = 0; i < prospects.length; i++) {
       const prospect = prospects[i];
       if (!prospect.email.trim() || !prospect.firstName.trim() || !prospect.lastName.trim()) {
@@ -55,24 +55,32 @@ export default function ReferralForm() {
       return;
     }
 
-    const calculatedChecksum = calculateChecksum(`${em}${nm}${ref}`);
-
-    if (calculatedChecksum !== cs) {
-      setErrorMessage("Invalid URL: Checksum mismatch.");
-      return;
-    }
-
-    const referralData = {
-      member_name: nm.trim(),
-      member_email: em,
-      referral_code: ref,
-      prospects: prospects.map((prospect) => ({
-        prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
-        prospect_email: prospect.email,
-      })),
-    };
-
     try {
+      // Call the checksum API
+      const checksumResponse = await fetch("/api/checksum", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ em, nm, ref, cs }),
+      });
+
+      if (!checksumResponse.ok) {
+        const data = await checksumResponse.json();
+        setErrorMessage(data.message || "Checksum validation failed.");
+        return;
+      }
+
+      // Prepare referral data
+      const referralData = {
+        member_name: nm.trim(),
+        member_email: em,
+        referral_code: ref,
+        prospects: prospects.map((prospect) => ({
+          prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
+          prospect_email: prospect.email,
+        })),
+      };
+
+      // Submit referral data
       const response = await fetch("/api/referral", {
         method: "POST",
         headers: {
