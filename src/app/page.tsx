@@ -26,6 +26,16 @@ export default function Home() {
       {/* Why Refer & Referral History */}
       <section className={styles.referralSection}>
         <div className={styles.leftSection}>
+          <Image
+            src="/produce_2.jpg"
+            alt="Fresh Produce"
+            width={600}
+            height={600}
+            layout="intrinsic"
+            className={styles.produceImage}
+          />
+        </div>
+        <div className={styles.rightSection}>
           <h2>Why Should I Refer?</h2>
           <p>
             Each new member brings fresh ideas, helps us offer more events, and keeps our shelves stocked with an even
@@ -36,9 +46,6 @@ export default function Home() {
             For each new member you bring in, you’ll earn points to redeem special prizes. Past prizes have included
             bottles of wine, engraved bricks, and more.
           </p>
-        </div>
-        <div className={styles.rightSection}>
-          <h2 className={styles.referralHistoryTitle}>Referral History</h2>
         </div>
       </section>
     </main>
