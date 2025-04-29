@@ -34,13 +34,11 @@
 .hero {
   display: flex;
   flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: space-between;
   width: 100%;
   background-color: #fadfc4;
   box-sizing: border-box;
-  padding-left: 2rem; /* keep only left padding */
-  padding-right: 2rem; /* remove right padding */
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin: 0;
   gap: 0; /* remove the gap so there's no forced spacing */
 }
@@ -72,18 +70,25 @@
   color: #523018;
 }
 
-.heroImage {
-  flex: 1 1 600px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 0;
+/* .heroImage {
+  flex: 1 1 300px;
+  display: none;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+} */
+
+.heroImageWrapper {
+  position: relative;
+  flex: 1 1 300px;
+  width: 100%;
+  height: auto;
+  min-height: 400px; /*ensures some height so image isn't 0px tall */
+  max-width: 900px;
 }
 
-.heroImage img {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
+.heroImage {
+  display: none;
   object-fit: cover;
 }
 
@@ -97,16 +102,21 @@
 }
 
 .leftSection {
-  flex: 2 1 600px;
-  display: flex;
+  display: none;
+  flex: 2 1 470px;
   flex-direction: column;
   justify-content: center;
 }
 
-.produceImage {
-  object-fit: cover;
+.produceImageWrapper {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.produceImage {
+  display: none;
+  object-fit: cover;
 }
 
 .rightSection {
@@ -166,12 +176,21 @@
 }
 
 /* when it gets bigger than mobile view */
-@media (min-width: 1065px) {
+@media (min-width: 768px) {
   .hero {
     padding-right: 0;
   }
   .heroImage {
-    padding-left: 8rem;
+    display: flex;
+    padding-left: 6rem;
+  }
+
+  .produceImage {
+    display: flex;
+  }
+
+  .leftSection {
+    display: flex;
   }
 }
 
@@ -183,10 +202,5 @@
 
   .heroText h2 {
     font-size: 2rem;
-  }
-
-  .leftSection,
-  .rightSection {
-    padding: 3rem;
   }
 }

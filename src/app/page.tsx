@@ -18,22 +18,29 @@ export default function Home() {
           {/* Referral Form */}
           <ReferralForm />
         </div>
-        <div className={styles.heroImage}>
-          <Image src="/produce.jpg" alt="Fresh Produce" width={600} height={600} layout="intrinsic" />
+        <div className={styles.heroImageWrapper}>
+          <Image
+            src="/produce.jpg"
+            alt="Fresh Produce"
+            fill
+            className={styles.heroImage}
+            style={{ objectFit: "cover" }}
+          />
         </div>
       </section>
 
       {/* Why Refer & Referral History */}
       <section className={styles.referralSection}>
         <div className={styles.leftSection}>
-          <Image
-            src="/produce_2.jpg"
-            alt="Fresh Produce"
-            width={600}
-            height={600}
-            layout="intrinsic"
-            className={styles.produceImage}
-          />
+          <div className={styles.produceImageWrapper}>
+            <Image
+              src="/produce_2.jpg"
+              alt="Fresh Produce"
+              fill
+              className={styles.produceImage}
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
         <div className={styles.rightSection}>
           <h2>Why Should I Refer?</h2>
