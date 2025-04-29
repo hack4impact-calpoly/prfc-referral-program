@@ -60,6 +60,8 @@ export default function ReferralForm() {
 
     const calculatedChecksum = calculateChecksum(`${em}${nm}${ref}`);
 
+    console.log(calculatedChecksum);
+    console.log(cs);
     if (calculatedChecksum !== cs) {
       setErrorMessage("Invalid URL: Checksum mismatch.");
       return;
