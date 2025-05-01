@@ -1,10 +1,12 @@
-"use client"; //marks as a client component (MUI required)
+"use client";
 
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
-const CustomToolbar = () => {
+const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (
     <div style={{ padding: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       {/* Search Bar with Border */}
@@ -32,11 +34,25 @@ const CustomToolbar = () => {
 
       {/* Styled Default Toolbar */}
       <GridToolbar />
+
+      {/* Export to PDF Button */}
+      <button
+        onClick={onExport}
+        style={{
+          padding: "8px 16px",
+          backgroundColor: "#831002",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Export to PDF
+      </button>
     </div>
   );
 };
 
-//allowing for searching and sorting
 export default function ReferralDataGrid() {
   const [rows, setRows] = useState<GridRowsProp>([]);
 
@@ -98,6 +114,37 @@ export default function ReferralDataGrid() {
     fetchReferrals();
   }, []);
 
+  // Export all rows to PDF
+  const exportToPDF = async () => {
+    try {
+      // Fetch all rows from the database
+      const response = await fetch("/api/referral");
+      if (!response.ok) throw new Error("Failed to fetch referrals");
+      const data = await response.json();
+
+      // Create a new PDF document
+      const doc = new jsPDF();
+
+      // Define table columns
+      const tableColumns = columns.map((col) => col.headerName);
+
+      // Define table rows
+      const tableRows = data.map((row: any) => columns.map((col) => row[col.field as keyof typeof row] || ""));
+
+      // Add the table to the PDF
+      doc.autoTable({
+        head: [tableColumns],
+        body: tableRows,
+        startY: 20,
+      });
+
+      // Save the PDF
+      doc.save("referrals.pdf");
+    } catch (error) {
+      console.error("Error exporting to PDF:", error);
+    }
+  };
+
   return (
     <div style={{ height: 572, width: "100%" }}>
       <DataGrid
@@ -105,7 +152,7 @@ export default function ReferralDataGrid() {
         columns={columns}
         pageSizeOptions={[5, 10, 20]}
         checkboxSelection
-        slots={{ toolbar: CustomToolbar }}
+        slots={{ toolbar: () => <CustomToolbar onExport={exportToPDF} /> }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,
