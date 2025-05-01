@@ -4,7 +4,6 @@ import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
 
 const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (
@@ -128,14 +127,40 @@ export default function ReferralDataGrid() {
       // Define table columns
       const tableColumns = columns.map((col) => col.headerName);
 
-      // Define table rows
-      const tableRows = data.map((row: any) => columns.map((col) => row[col.field as keyof typeof row] || ""));
+      // Set initial Y position for the table
+      let y = 20;
 
-      // Add the table to the PDF
-      doc.autoTable({
-        head: [tableColumns],
-        body: tableRows,
-        startY: 20,
+      // Add title
+      doc.setFontSize(14);
+      doc.text("Referral Database", 105, y, { align: "center" });
+      y += 10;
+
+      // Add table headers
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "bold");
+      let x = 10;
+      tableColumns.forEach((header) => {
+        doc.text(header, x, y);
+        x += 40; // Adjust column width
+      });
+      y += 10;
+
+      // Add table rows
+      doc.setFont("helvetica", "normal");
+      data.forEach((row: any) => {
+        x = 10;
+        columns.forEach((col) => {
+          const cellValue = row[col.field as keyof typeof row] || "";
+          doc.text(String(cellValue), x, y);
+          x += 40; // Adjust column width
+        });
+        y += 10;
+
+        // Check if the Y position exceeds the page height
+        if (y > 280) {
+          doc.addPage();
+          y = 20; // Reset Y position for the new page
+        }
       });
 
       // Save the PDF
