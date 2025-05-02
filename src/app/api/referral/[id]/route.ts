@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/database/db";
 
-export async function PUT(req: NextRequest, context: { params: { id?: string } }) {
+export async function PUT(req: NextRequest, context: { params: Record<string, string> }) {
   try {
     const resolvedParams = await context.params; // Await the params
     if (!resolvedParams?.id) {
