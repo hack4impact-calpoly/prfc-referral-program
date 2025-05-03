@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       <div className={styles.logoContainer}>
         {/* <img src="/logo.jpg" alt="Logo" className={styles.logo} /> */}
         <Image
-          src="/assets/logo.png"
+          src="/logo.jpg"
           alt="Logo"
           className={styles.logo}
           width={120} // Adjust based on your needs
