@@ -62,12 +62,14 @@
   font-size: 1.9rem;
   color: #831002;
   margin-bottom: 0.5rem;
+  font-size: clamp(0.8rem, 4vw, 2.5rem);
 }
 
 .heroText h2 {
   font-family: "Komika Axis", sans-serif;
   font-size: 1.5rem;
   color: #523018;
+  font-size: clamp(0.8rem, 3.8vw, 2.5rem);
 }
 
 /* .heroImage {
