@@ -22,3 +22,45 @@
   min-height: 60px; /* Adjust logo size as needed */
   width: auto;
 }
+/*
+  Add your mobile-specific styles below using a media query.
+  Choose a breakpoint that makes sense for your design,
+  e.g., max-width: 768px or max-width: 600px.
+*/
+
+@media (max-width: 768px) {
+  /* Example breakpoint for mobile */
+  .header {
+    height: auto; /* Allow height to adjust based on content and padding */
+    /*
+      Set the background image for mobile.
+      You'll need the correct path to the hero image from your first screenshot.
+      Assuming the image is in your public directory or assets.
+    */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/produce.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; /* Center the background image */
+    background-color: unset; /* Remove the white background color on mobile */
+    padding: 40px 20px; /* Increased top/bottom padding */
+    box-shadow: none; /* Optional: remove shadow on mobile */
+    /* You might need to adjust justify-content and align-items if the logo position changes */
+  }
+
+  .logo {
+    height: 4vw;
+    min-height: 60px; /* Adjust logo size as needed */
+    width: auto;
+  }
+
+  .logoContainer {
+    display: flex;
+    align-items: center;
+  }
+
+  /*
+    If you have text or other elements directly in the header
+    besides the logo, you might need to style them here for visibility
+    against the background image (e.g., change text color to white).
+  */
+}
