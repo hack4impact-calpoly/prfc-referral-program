@@ -1,9 +1,18 @@
 "use client";
 
-import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridRowsProp,
+  GridColDef,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarDensitySelector,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (
@@ -31,8 +40,12 @@ const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
         />
       </div>
 
-      {/* Styled Default Toolbar */}
-      <GridToolbar />
+      {/* Columns, Filters, Density */}
+      <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+      </div>
 
       {/* Export to PDF Button */}
       <button
@@ -121,50 +134,45 @@ export default function ReferralDataGrid() {
       if (!response.ok) throw new Error("Failed to fetch referrals");
       const data = await response.json();
 
-      // Create a new PDF document
       const doc = new jsPDF();
 
-      // Define table columns
-      const tableColumns = columns.map((col) => col.headerName);
+      // Define the columns (header names)
+      const tableColumns = columns.map((col) => col.headerName ?? col.field);
 
-      // Set initial Y position for the table
-      let y = 20;
+      // Map data rows to match column fields
+      const tableRows = data.map((row: any) =>
+        columns.map((col) => {
+          const value = row[col.field as keyof typeof row];
+          return value !== undefined && value !== null ? String(value) : "";
+        }),
+      );
 
-      // Add title
-      doc.setFontSize(14);
-      doc.text("Referral Database", 105, y, { align: "center" });
-      y += 10;
+      // Add the title
+      doc.setFontSize(16);
+      doc.text("Paso Food Co-op Referral Database", doc.internal.pageSize.getWidth() / 2, 15, { align: "center" });
 
-      // Add table headers
-      doc.setFontSize(12);
-      doc.setFont("helvetica", "bold");
-      let x = 10;
-      tableColumns.forEach((header) => {
-        doc.text(header, x, y);
-        x += 40; // Adjust column width
-      });
-      y += 10;
-
-      // Add table rows
-      doc.setFont("helvetica", "normal");
-      data.forEach((row: any) => {
-        x = 10;
-        columns.forEach((col) => {
-          const cellValue = row[col.field as keyof typeof row] || "";
-          doc.text(String(cellValue), x, y);
-          x += 40; // Adjust column width
-        });
-        y += 10;
-
-        // Check if the Y position exceeds the page height
-        if (y > 280) {
-          doc.addPage();
-          y = 20; // Reset Y position for the new page
-        }
+      // To add the table with full data
+      autoTable(doc, {
+        head: [tableColumns],
+        body: tableRows,
+        startY: 25,
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [131, 16, 2] }, // dark red header
+        alternateRowStyles: { fillColor: [237, 221, 204] }, // odd/even row colors
+        margin: { left: 10, right: 10 },
+        columnStyles: {
+          0: { cellWidth: 10 }, // ID column width
+          1: { cellWidth: 27 }, // MemberName column width
+          2: { cellWidth: 35 }, // MemberEmail column width
+          3: { cellWidth: 28 }, // ProspectName column width
+          5: { cellWidth: 17 }, // Code column width
+          6: { cellWidth: 22 }, // Redeemed column width
+        },
       });
 
-      // Save the PDF
-      doc.save("referrals.pdf");
+      // Open print dialog instead of downloading
+      doc.autoPrint();
+      window.open(doc.output("bloburl"), "_blank");
     } catch (error) {
       console.error("Error exporting to PDF:", error);
     }
@@ -195,7 +203,7 @@ export default function ReferralDataGrid() {
             color: "#831002", // Set text color of headers
           },
           "& .MuiDataGrid-columnHeaderTitle": {
-            fontWeight: "bold", // Force the title text to be bold
+            fontWeight: "bold",
             textDecoration: "underline",
           },
           "& .MuiDataGrid-row": {
