@@ -177,6 +177,45 @@
   font-size: 1rem;
 }
 
+@media (max-width: 768px) {
+  .heroImageWrapper {
+    display: none;
+  }
+  .leftSection {
+    display: none;
+  }
+
+  .rightSection {
+    display: flex;
+    flex-direction: column;
+  }
+  .rightSection h2 {
+    font-size: 1.4rem;
+    font-family: "Komika Axis", sans-serif;
+    color: white;
+
+    margin-bottom: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .rightSection h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .rightSection p {
+    font-size: 0.9rem;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 1rem;
+
+    margin-top: 0;
+  }
+
+  .rightSection p:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
 /* when it gets bigger than mobile view */
 @media (min-width: 768px) {
   .hero {
