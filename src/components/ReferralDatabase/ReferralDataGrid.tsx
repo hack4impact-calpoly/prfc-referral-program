@@ -93,7 +93,7 @@ export default function ReferralDataGrid() {
       field: "created_at_formatted",
       headerName: "Date",
       flex: 1,
-      sortable: false, // Disable sorting for this column
+      sortable: true,
     },
     { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
     { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
@@ -175,6 +175,11 @@ export default function ReferralDataGrid() {
         }),
       );
 
+      // Set PDF properties (Name when downloaded)
+      doc.setProperties({
+        title: "Paso Food Co-op Referral Database",
+      });
+
       // Add the title
       doc.setFontSize(16);
       doc.text("Paso Food Co-op Referral Database", doc.internal.pageSize.getWidth() / 2, 15, { align: "center" });
@@ -189,7 +194,7 @@ export default function ReferralDataGrid() {
         alternateRowStyles: { fillColor: [237, 221, 204] }, // odd/even row colors
         margin: { left: 10, right: 10 },
         columnStyles: {
-          0: { cellWidth: 20 }, // ID column width
+          0: { cellWidth: 24 }, // ID column width
           1: { cellWidth: 27 }, // MemberName column width
           2: { cellWidth: 35 }, // MemberEmail column width
           3: { cellWidth: 28 }, // ProspectName column width
