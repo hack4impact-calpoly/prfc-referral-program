@@ -89,7 +89,12 @@ export default function ReferralDataGrid() {
 
   // Fields for data
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "created_at_formatted",
+      headerName: "Date",
+      flex: 1,
+      sortable: false, // Disable sorting for this column
+    },
     { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
     { field: "member_email", headerName: "MemberEmail", flex: 1, sortable: true },
     { field: "prospect_name", headerName: "ProspectName", flex: 1, sortable: true },
@@ -117,7 +122,19 @@ export default function ReferralDataGrid() {
         const response = await fetch("/api/referral");
         if (!response.ok) throw new Error("Failed to fetch referrals");
         const data = await response.json();
-        setRows(data);
+        // Map and pre-format the date BEFORE setting rows
+        const formattedData = data.map((item: any) => ({
+          ...item,
+          created_at_formatted: new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }).format(new Date(item.created_at)),
+        }));
+        setRows(formattedData);
       } catch (error) {
         console.error("Error fetching referrals:", error);
       }
@@ -142,7 +159,18 @@ export default function ReferralDataGrid() {
       // Map data rows to match column fields
       const tableRows = data.map((row: any) =>
         columns.map((col) => {
-          const value = row[col.field as keyof typeof row];
+          let value = row[col.field as keyof typeof row];
+          if (col.field === "created_at_formatted" || col.field === "created_at") {
+            value = new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            }).format(new Date(row.created_at));
+          }
+
           return value !== undefined && value !== null ? String(value) : "";
         }),
       );
@@ -161,7 +189,7 @@ export default function ReferralDataGrid() {
         alternateRowStyles: { fillColor: [237, 221, 204] }, // odd/even row colors
         margin: { left: 10, right: 10 },
         columnStyles: {
-          0: { cellWidth: 10 }, // ID column width
+          0: { cellWidth: 20 }, // ID column width
           1: { cellWidth: 27 }, // MemberName column width
           2: { cellWidth: 35 }, // MemberEmail column width
           3: { cellWidth: 28 }, // ProspectName column width
@@ -183,7 +211,7 @@ export default function ReferralDataGrid() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSizeOptions={[5, 10, 20]}
+        pageSizeOptions={[5, 10, 20, 100]}
         checkboxSelection
         slots={{ toolbar: () => <CustomToolbar onExport={exportToPDF} /> }}
         slotProps={{
