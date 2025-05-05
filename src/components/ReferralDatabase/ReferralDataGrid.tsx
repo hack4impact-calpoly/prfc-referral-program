@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import dayjs from "dayjs"; // For date
 
 const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (
@@ -212,7 +213,13 @@ export default function ReferralDataGrid() {
   };
 
   return (
-    <div style={{ height: 572, width: "100%" }}>
+    <div
+      style={{
+        height: "calc(100vh - 12rem", // Subtract the header height from the full screen height
+        width: "100%",
+        margin: "0 auto", //Center horizontally
+      }}
+    >
       <DataGrid
         rows={rows}
         columns={columns}
@@ -224,6 +231,7 @@ export default function ReferralDataGrid() {
             showQuickFilter: true,
           },
         }}
+        getRowClassName={(params) => (params.indexRelativeToCurrentPage % 2 === 0 ? "even-row" : "odd-row")}
         sx={{
           border: "2px solid #968676",
           borderRadius: "12px",
@@ -239,13 +247,14 @@ export default function ReferralDataGrid() {
             fontWeight: "bold",
             textDecoration: "underline",
           },
+          "& .even-row": {
+            backgroundColor: "#ffffff",
+          },
+          "& .odd-row": {
+            backgroundColor: "#D9D9D9",
+          },
           "& .MuiDataGrid-row": {
-            "&:nth-of-type(odd)": {
-              backgroundColor: "#D9D9D9", // Odd row background color
-            },
-            "&:nth-of-type(even)": {
-              backgroundColor: "#ffffff", // Even row background color
-            },
+            transition: "none !important",
           },
         }}
       />

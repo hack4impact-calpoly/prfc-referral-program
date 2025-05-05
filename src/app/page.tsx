@@ -2,6 +2,7 @@ import Header from "@/components/Header/Header";
 import ReferralForm from "@/components/ReferralForm/ReferralForm";
 import styles from "@/styles/page.module.css";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -16,7 +17,9 @@ export default function Home() {
             <h2>Refer a Family Member or Friend</h2>
           </div>
           {/* Referral Form */}
-          <ReferralForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ReferralForm />
+          </Suspense>
         </div>
         <div className={styles.heroImage}>
           <Image src="/produce.jpg" alt="Fresh Produce" width={600} height={600} layout="intrinsic" />
