@@ -1,11 +1,21 @@
-"use client"; //marks as a client component (MUI required)
+"use client";
 
-import { DataGrid, GridRowsProp, GridColDef, GridToolbar, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridRowsProp,
+  GridColDef,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarDensitySelector,
+  GridToolbarQuickFilter,
+} from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import dayjs from "dayjs"; // For date
 
-const CustomToolbar = () => {
+const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (
     <div style={{ padding: "8px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       {/* Search Bar with Border */}
@@ -31,13 +41,31 @@ const CustomToolbar = () => {
         />
       </div>
 
-      {/* Styled Default Toolbar */}
-      <GridToolbar />
+      {/* Columns, Filters, Density */}
+      <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+      </div>
+
+      {/* Export to PDF Button */}
+      <button
+        onClick={onExport}
+        style={{
+          padding: "8px 16px",
+          backgroundColor: "#831002",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Export to PDF
+      </button>
     </div>
   );
 };
 
-//allowing for searching and sorting
 export default function ReferralDataGrid() {
   const [rows, setRows] = useState<GridRowsProp>([]);
 
@@ -63,13 +91,9 @@ export default function ReferralDataGrid() {
   // Fields for data
   const columns: GridColDef[] = [
     {
-      field: "created_at",
+      field: "created_at_formatted",
       headerName: "Date",
       flex: 1,
-      valueGetter: (params: any) => {
-        const date = dayjs(params.value);
-        return date.isValid() ? date.format("MM/DD/YYYY HH:mm:ss") : "Invalid date";
-      },
       sortable: true,
     },
     { field: "member_name", headerName: "MemberName", flex: 1, sortable: true },
@@ -99,7 +123,19 @@ export default function ReferralDataGrid() {
         const response = await fetch("/api/referral");
         if (!response.ok) throw new Error("Failed to fetch referrals");
         const data = await response.json();
-        setRows(data);
+        // Map and pre-format the date BEFORE setting rows
+        const formattedData = data.map((item: any) => ({
+          ...item,
+          created_at_formatted: new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }).format(new Date(item.created_at)),
+        }));
+        setRows(formattedData);
       } catch (error) {
         console.error("Error fetching referrals:", error);
       }
@@ -107,6 +143,74 @@ export default function ReferralDataGrid() {
 
     fetchReferrals();
   }, []);
+
+  // Export all rows to PDF
+  const exportToPDF = async () => {
+    try {
+      // Fetch all rows from the database
+      const response = await fetch("/api/referral");
+      if (!response.ok) throw new Error("Failed to fetch referrals");
+      const data = await response.json();
+
+      const doc = new jsPDF();
+
+      // Define the columns (header names)
+      const tableColumns = columns.map((col) => col.headerName ?? col.field);
+
+      // Map data rows to match column fields
+      const tableRows = data.map((row: any) =>
+        columns.map((col) => {
+          let value = row[col.field as keyof typeof row];
+          if (col.field === "created_at_formatted" || col.field === "created_at") {
+            value = new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            }).format(new Date(row.created_at));
+          }
+
+          return value !== undefined && value !== null ? String(value) : "";
+        }),
+      );
+
+      // Set PDF properties (Name when downloaded)
+      doc.setProperties({
+        title: "Paso Food Co-op Referral Database",
+      });
+
+      // Add the title
+      doc.setFontSize(16);
+      doc.text("Paso Food Co-op Referral Database", doc.internal.pageSize.getWidth() / 2, 15, { align: "center" });
+
+      // To add the table with full data
+      autoTable(doc, {
+        head: [tableColumns],
+        body: tableRows,
+        startY: 25,
+        styles: { fontSize: 10 },
+        headStyles: { fillColor: [131, 16, 2] }, // dark red header
+        alternateRowStyles: { fillColor: [237, 221, 204] }, // odd/even row colors
+        margin: { left: 10, right: 10 },
+        columnStyles: {
+          0: { cellWidth: 24 }, // ID column width
+          1: { cellWidth: 27 }, // MemberName column width
+          2: { cellWidth: 35 }, // MemberEmail column width
+          3: { cellWidth: 28 }, // ProspectName column width
+          5: { cellWidth: 17 }, // Code column width
+          6: { cellWidth: 22 }, // Redeemed column width
+        },
+      });
+
+      // Open print dialog instead of downloading
+      doc.autoPrint();
+      window.open(doc.output("bloburl"), "_blank");
+    } catch (error) {
+      console.error("Error exporting to PDF:", error);
+    }
+  };
 
   return (
     <div
@@ -119,9 +223,9 @@ export default function ReferralDataGrid() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSizeOptions={[5, 10, 20]}
+        pageSizeOptions={[5, 10, 20, 100]}
         checkboxSelection
-        slots={{ toolbar: CustomToolbar }}
+        slots={{ toolbar: () => <CustomToolbar onExport={exportToPDF} /> }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,
@@ -140,7 +244,7 @@ export default function ReferralDataGrid() {
             color: "#831002", // Set text color of headers
           },
           "& .MuiDataGrid-columnHeaderTitle": {
-            fontWeight: "bold", // Force the title text to be bold
+            fontWeight: "bold",
             textDecoration: "underline",
           },
           "& .even-row": {

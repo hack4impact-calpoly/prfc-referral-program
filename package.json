@@ -23,6 +23,8 @@
     "@mui/material": "^6.4.3",
     "@mui/x-data-grid": "^7.26.0",
     "@prisma/client": "^6.4.1",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "dayjs": "^1.11.13",
     "mongoose": "^8",
     "next": "^15.2.1",
@@ -33,6 +35,7 @@
   "devDependencies": {
     "@prisma/client": "^6.4.1",
     "@types/jest": "^29.5.14",
+    "@types/jspdf": "^1.3.3",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18",
