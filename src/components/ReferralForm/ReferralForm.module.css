@@ -30,13 +30,13 @@
 }
 
 /* Input group layout */
-.inputGroup {
+/* .inputGroup {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem; /* Reduced gap between input fields */
-  align-items: flex-start; /* Align items to the left */
-  margin-left: -0.4rem; /* Remove left margin */
-}
+  gap: 0.5rem; 
+  align-items: flex-start; 
+  margin-left: -0.4rem; 
+} */
 
 /* Label styling */
 .label {
@@ -48,12 +48,9 @@
 
 /* Input field styling */
 .input {
-  display: flex;
-  width: 30%; /* Adjusted width to fit more input fields */
+  flex: 1;
+  min-width: 0;
   padding: 12px 18px;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
   border-radius: 8px;
   border: 2px solid var(--brown, #523018);
   background: #fff;
@@ -113,9 +110,8 @@
   border-radius: 0px;
   margin-bottom: 1vh;
   display: flex;
-  flex-direction: row; /* Changed to row to align input fields horizontally */
+  flex-direction: column; /* Changed to row to align input fields horizontally */
   gap: 0.2rem; /* Reduced gap between input fields */
-  align-items: center; /* Align items to the center */
   /*margin-left: -0.5rem; /* Remove left margin */
   box-sizing: border-box;
 }
@@ -128,14 +124,13 @@
 }
 
 .crossButton {
+  display: flex;
   background: none;
   border: none;
   font-size: 18px;
   color: red;
   cursor: pointer;
-  margin-top: 0.5rem; /* Add margin to the top of the delete button */
-  margin-right: 0.5rem; /* Add margin to the right of the delete button */
-  align-self: flex-start; /* Align the delete button to the start */
+  margin-right: -0.5rem;
 }
 
 .crossButton:hover {
@@ -146,4 +141,20 @@
   color: red;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.nameRow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.emailAndDelete {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
 }

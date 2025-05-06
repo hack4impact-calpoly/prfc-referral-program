@@ -126,7 +126,7 @@ export default function ReferralForm() {
         </div>
       )}
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
+        {/* <div className={styles.inputGroup}>
           <label htmlFor="yourEmail" className={styles.label}></label>
           <input
             id="yourEmail"
@@ -137,49 +137,54 @@ export default function ReferralForm() {
             className={styles.input}
             readOnly
           />
-        </div>
+        </div> */}
         <div className={styles.prospectList}>
           {prospects.map((prospect, index) => (
             <div key={index} className={styles.prospectContainer}>
-              <label htmlFor={`prospectFirstName${index}`} className={styles.label}></label>
-              <input
-                id={`prospectFirstName${index}`}
-                type="text"
-                value={prospect.firstName}
-                onChange={(e) => handleProspectChange(index, "firstName", e.target.value)}
-                placeholder="Prospect's First Name"
-                className={styles.input}
-              />
-              <label htmlFor={`prospectLastName${index}`} className={styles.label}></label>
-              <input
-                id={`prospectLastName${index}`}
-                type="text"
-                value={prospect.lastName}
-                onChange={(e) => handleProspectChange(index, "lastName", e.target.value)}
-                placeholder="Prospect's Last Name"
-                className={styles.input}
-              />
-              <label htmlFor={`prospectEmail${index}`} className={styles.label}></label>
-              <input
-                id={`prospectEmail${index}`}
-                type="email"
-                value={prospect.email}
-                onChange={(e) => handleProspectChange(index, "email", e.target.value)}
-                placeholder="Prospect's Email Address"
-                className={styles.input}
-              />
-              <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
-                <Image src="/trash.png" alt="Delete" width={18} height={18} />
-              </button>
+              <div className={styles.nameRow}>
+                <label htmlFor={`prospectFirstName${index}`} className={styles.label}></label>
+                <input
+                  id={`prospectFirstName${index}`}
+                  type="text"
+                  value={prospect.firstName}
+                  onChange={(e) => handleProspectChange(index, "firstName", e.target.value)}
+                  placeholder="Enter First Name"
+                  className={styles.input}
+                />
+                <label htmlFor={`prospectLastName${index}`} className={styles.label}></label>
+                <input
+                  id={`prospectLastName${index}`}
+                  type="text"
+                  value={prospect.lastName}
+                  onChange={(e) => handleProspectChange(index, "lastName", e.target.value)}
+                  placeholder="Enter Last Name"
+                  className={styles.input}
+                />
+              </div>
+              <div className={styles.emailAndDelete}>
+                <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
+                  <Image src="/trash.png" alt="Delete" width={18} height={18} />
+                </button>
+                <label htmlFor={`prospectEmail${index}`} className={styles.label}></label>
+                <input
+                  id={`prospectEmail${index}`}
+                  type="email"
+                  value={prospect.email}
+                  onChange={(e) => handleProspectChange(index, "email", e.target.value)}
+                  placeholder="Enter Referee Email Address"
+                  className={styles.input}
+                />
+                <button type="submit" className={styles.button}>
+                  Invite
+                </button>
+              </div>
             </div>
           ))}
         </div>
         <button type="button" onClick={addProspect} className={styles.plusBox}>
           +
         </button>
-        <button type="submit" className={styles.button}>
-          Invite
-        </button>
+
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         <input type="hidden" name="referrerEmail" value={referrerEmail} />
         <input type="hidden" name="referrerFirstName" value={referrerFirstName} />
