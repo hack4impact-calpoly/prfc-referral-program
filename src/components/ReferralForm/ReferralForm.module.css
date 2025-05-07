@@ -75,6 +75,7 @@
     background-color 0.2s,
     transform 0.1s;
   text-align: center;
+  align-self: flex-end;
 }
 
 /* Button hover and active effects */

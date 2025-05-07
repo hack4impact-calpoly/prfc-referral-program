@@ -174,13 +174,13 @@ export default function ReferralForm() {
                   placeholder="Enter Referee Email Address"
                   className={styles.input}
                 />
-                <button type="submit" className={styles.button}>
-                  Invite
-                </button>
               </div>
             </div>
           ))}
         </div>
+        <button type="submit" className={styles.button}>
+          Invite
+        </button>
         <button type="button" onClick={addProspect} className={styles.plusBox}>
           +
         </button>
