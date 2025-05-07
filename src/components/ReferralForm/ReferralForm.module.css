@@ -155,3 +155,9 @@
   align-items: center;
   gap: 0.5rem;
 }
+/* 
+@media (min-width: 768px) {
+  .prospectContainer{
+    flex-direction: row;
+  }
+} */
