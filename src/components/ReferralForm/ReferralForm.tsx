@@ -126,7 +126,7 @@ export default function ReferralForm() {
         </div>
       )}
       <form onSubmit={handleSubmit} className={styles.form}>
-        {/* <div className={styles.inputGroup}>
+        <div className={styles.referrerEmail}>
           <label htmlFor="yourEmail" className={styles.label}></label>
           <input
             id="yourEmail"
@@ -137,7 +137,7 @@ export default function ReferralForm() {
             className={styles.input}
             readOnly
           />
-        </div> */}
+        </div>
         <div className={styles.prospectList}>
           {prospects.map((prospect, index) => (
             <div key={index} className={styles.prospectContainer}>

@@ -25,18 +25,17 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.75rem;
   width: 100%;
 }
 
 /* Input group layout */
-/* .inputGroup {
+.referrerEmail {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem; 
-  align-items: flex-start; 
-  margin-left: -0.4rem; 
-} */
+  gap: 0.5rem;
+  align-items: flex-start;
+}
 
 /* Label styling */
 .label {
@@ -105,14 +104,12 @@
 /* Delete button */
 .prospectContainer {
   position: relative;
-  /* padding: 1px; */
   border: none;
   border-radius: 0px;
   margin-bottom: 1vh;
   display: flex;
   flex-direction: column; /* Changed to row to align input fields horizontally */
   gap: 0.2rem; /* Reduced gap between input fields */
-  /*margin-left: -0.5rem; /* Remove left margin */
   box-sizing: border-box;
 }
 
