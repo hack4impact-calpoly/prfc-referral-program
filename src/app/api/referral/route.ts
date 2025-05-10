@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/database/db";
 import nodemailer from "nodemailer";
+import path from "path";
 
 export async function POST(req: NextRequest) {
   try {
@@ -77,13 +78,14 @@ const transport = nodemailer.createTransport({
 
 async function sendEmail(prospects: any, ref: any, member: any) {
   let emailsSent = true;
+  const emailImgPath = path.join(process.cwd(), "public", "assets", "paso-coop.jpeg");
+
   for (const prospect of prospects) {
     // console.log(prospect.prospect_email);
     const mail = {
       from: process.env.FROM_EMAIL,
       to: prospect.prospect_email,
       subject: "You've Been Invited!",
-      text: `Hello! -nodemailer\n`,
       html: `<div style="width: 100%; max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
     
     
@@ -134,7 +136,7 @@ async function sendEmail(prospects: any, ref: any, member: any) {
       attachments: [
         {
           filename: "paso-coop.jpeg", // Name of the file as it will appear in the email
-          path: "public/assets/paso-coop.jpeg", // Path relative to your project root
+          path: emailImgPath, // Path relative to your project root
           cid: "pasoLogo", // Content ID referenced in the HTML img src
         },
       ],
