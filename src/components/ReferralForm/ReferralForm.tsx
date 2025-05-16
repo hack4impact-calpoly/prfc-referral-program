@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function ReferralForm() {
   const searchParams = useSearchParams();
   const [yourEmail, setYourEmail] = useState("");
-  const [prospects, setProspects] = useState([{ email: "", firstName: "", lastName: "" }]);
+  const [prospects, setProspects] = useState([{ email: "", fullName: "" }]);
   const [referrerEmail, setReferrerEmail] = useState("");
   const [referrerFirstName, setReferrerFirstName] = useState("");
   const [referrerLastName, setReferrerLastName] = useState("");
@@ -42,7 +42,7 @@ export default function ReferralForm() {
     // Validate prospects
     for (let i = 0; i < prospects.length; i++) {
       const prospect = prospects[i];
-      if (!prospect.email.trim() || !prospect.firstName.trim() || !prospect.lastName.trim()) {
+      if (!prospect.email.trim() || !prospect.fullName.trim()) {
         setErrorMessage(`Please fill out all fields for Prospect ${i + 1}.`);
         return;
       }
@@ -65,7 +65,16 @@ export default function ReferralForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ em, nm, ref, cs }),
       });
-
+      
+      const referralData = {
+      member_name: nm.trim(),
+      member_email: em,
+      referral_code: ref,
+      prospects: prospects.map((prospect) => ({
+        prospect_name: `${prospect.fullName}`.trim(),
+        prospect_email: prospect.email,
+      })),
+      };
       if (!checksumResponse.ok) {
         const data = await checksumResponse.json();
         setErrorMessage(data.message || "Checksum validation failed.");
@@ -94,7 +103,7 @@ export default function ReferralForm() {
 
       if (response.ok) {
         console.log("Referral created successfully");
-        setProspects([{ email: "", firstName: "", lastName: "" }]);
+        setProspects([{ email: "", fullName: "" }]);
         setYourEmail("");
         setShowConfirmation(true); // Show confirmation popup
       } else {
@@ -105,14 +114,14 @@ export default function ReferralForm() {
     }
   };
 
-  const handleProspectChange = (index: number, field: "email" | "firstName" | "lastName", value: string) => {
+  const handleProspectChange = (index: number, field: "email" | "fullName", value: string) => {
     const newProspects = [...prospects];
     newProspects[index][field] = value;
     setProspects(newProspects);
   };
 
   const addProspect = () => {
-    setProspects([...prospects, { email: "", firstName: "", lastName: "" }]);
+    setProspects([...prospects, { email: "", fullName: "" }]);
   };
 
   const deleteProspect = (index: number) => {
@@ -154,22 +163,13 @@ export default function ReferralForm() {
               </button>
               <div className={styles.inputFields}>
                 <div className={styles.nameRow}>
-                  <label htmlFor={`prospectFirstName${index}`} className={styles.label}></label>
+                  <label htmlFor={`prospectFullName${index}`} className={styles.label}></label>
                   <input
-                    id={`prospectFirstName${index}`}
+                    id={`prospectFullName${index}`}
                     type="text"
-                    value={prospect.firstName}
-                    onChange={(e) => handleProspectChange(index, "firstName", e.target.value)}
-                    placeholder="Enter First Name"
-                    className={styles.input}
-                  />
-                  <label htmlFor={`prospectLastName${index}`} className={styles.label}></label>
-                  <input
-                    id={`prospectLastName${index}`}
-                    type="text"
-                    value={prospect.lastName}
-                    onChange={(e) => handleProspectChange(index, "lastName", e.target.value)}
-                    placeholder="Enter Last Name"
+                    value={prospect.fullName}
+                    onChange={(e) => handleProspectChange(index, "fullName", e.target.value)}
+                    placeholder="Enter Referee Full Name"
                     className={styles.input}
                   />
                 </div>
