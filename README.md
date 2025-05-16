@@ -17,21 +17,20 @@ The Paso Robles Food Co-op is a non-profit organization dedicated to building a 
 
 ### Team
 
-The PRFC team consists of 13 Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
+The PRFC team consists of 12 Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
 
-- [Alexios Sideris](https://www.linkedin.com/in/alexios-sideris/) - Project Manager
-- [Naomi Tan](https://www.linkedin.com/) - Designer
-- [Kayle Le](https://www.linkedin.com/in/kayla-le-2227a61b0?trk=contact-info) - Designer
-- [Anagha Kulkami](https://www.linkedin.com/in/anagha-kul/) - Designer
 - [Ivan Alvarez](https://www.linkedin.com/in/ivanalvarez04/) - Tech Lead
 - [Amanda Chan](https://www.linkedin.com/in/achan04/) - Tech Lead
+- [Alexios Sideris](https://www.linkedin.com/in/alexios-sideris/) - Project Manager
+- [Naomi Tan](https://www.linkedin.com/) - Designer
+- [Kayla Le](https://www.linkedin.com/in/kayla-le-2227a61b0?trk=contact-info) - Designer
+- [Anagha Kulkami](https://www.linkedin.com/in/anagha-kul/) - Designer
 - [Vinayak Kohli](https://www.linkedin.com/) - Software Developer
 - [Karthik Balaji](https://www.linkedin.com/in/karthik-balaji-6529011ab/) - Software Developer
 - [Min Hset Hlaing](https://www.linkedin.com/in/min-hset-hlaing-37013b224/) - Software Developer
 - [Sue Sue](https://www.linkedin.com/in/sue-sue/) - Software Developer
 - [Camila Yeremin](https://www.linkedin.com/) - Software Developer
 - [Winnie Trinh](https://www.linkedin.com/in/winnie-trinh/) - Software Developer
-- [Charles Moreno](https://www.linkedin.com/) - Software Developer
 
 ## Getting Started And Contributing
 
