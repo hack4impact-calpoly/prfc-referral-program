@@ -65,32 +65,21 @@ export default function ReferralForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ em, nm, ref, cs }),
       });
-      
+
       const referralData = {
-      member_name: nm.trim(),
-      member_email: em,
-      referral_code: ref,
-      prospects: prospects.map((prospect) => ({
-        prospect_name: `${prospect.fullName}`.trim(),
-        prospect_email: prospect.email,
-      })),
+        member_name: nm.trim(),
+        member_email: em,
+        referral_code: ref,
+        prospects: prospects.map((prospect) => ({
+          prospect_name: `${prospect.fullName}`.trim(),
+          prospect_email: prospect.email,
+        })),
       };
       if (!checksumResponse.ok) {
         const data = await checksumResponse.json();
         setErrorMessage(data.message || "Checksum validation failed.");
         return;
       }
-
-      // Prepare referral data
-      const referralData = {
-        member_name: nm.trim(),
-        member_email: em,
-        referral_code: ref,
-        prospects: prospects.map((prospect) => ({
-          prospect_name: `${prospect.firstName} ${prospect.lastName}`.trim(),
-          prospect_email: prospect.email,
-        })),
-      };
 
       // Submit referral data
       const response = await fetch("/api/referral", {
