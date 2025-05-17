@@ -156,18 +156,20 @@
   flex-wrap: wrap;
 }
 
-/* .nameRow input {
-  flex: 1;
-  min-width: 120px; 
-} */
-
 .emailRow {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
 }
 
 .emailRow input {
   width: 100%;
+}
+
+.inviteButtonContainer {
+  display: flex;
 }
 
 /* Confirmation popup styling */
@@ -205,21 +207,15 @@
 @media (min-width: 768px) {
   .inputFields {
     flex-direction: row;
-    /* gap: 15px; */
   }
 
   .nameRow {
-    width: 60%;
+    flex: 1;
   }
 
   .emailRow {
-    width: 40%;
+    flex: 2;
   }
-
-  /* .crossButton {
-    margin-bottom: 0;
-    align-self: center;
-  } */
 }
 
 @media (max-width: 480px) {
