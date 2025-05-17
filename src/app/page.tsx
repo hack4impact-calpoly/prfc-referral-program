@@ -32,7 +32,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Refer & Referral History */}
+      {/* Why Refer & Referral History Section */}
       <section className={styles.referralSection}>
         <div className={styles.leftSection}>
           <div className={styles.produceImageWrapper}>
