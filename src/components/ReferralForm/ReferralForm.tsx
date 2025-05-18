@@ -110,13 +110,21 @@ export default function ReferralForm() {
   };
 
   const addProspect = () => {
+    if (prospects.length >= 5) {
+      setErrorMessage("You can only refer up to 5 prospects at a time.");
+      return;
+    }
     setProspects([...prospects, { email: "", fullName: "" }]);
+    setErrorMessage(""); // Clear error message when adding a new prospect
   };
 
   const deleteProspect = (index: number) => {
     const newProspects = [...prospects];
     newProspects.splice(index, 1);
     setProspects(newProspects);
+    if (errorMessage) {
+      setErrorMessage("");
+    }
   };
 
   return (
@@ -180,10 +188,13 @@ export default function ReferralForm() {
         <button type="submit" className={styles.button}>
           Invite
         </button>
-        <button type="button" onClick={addProspect} className={styles.plusBox}>
-          +
-        </button>
-
+        {prospects.length < 5 ? (
+          <button type="button" onClick={addProspect} className={styles.plusBox}>
+            +
+          </button>
+        ) : (
+          <p className={styles.limitMessage}>You’ve reached the max of 5 referrals.</p>
+        )}
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         <input type="hidden" name="referrerEmail" value={referrerEmail} />
         <input type="hidden" name="referrerFirstName" value={referrerFirstName} />
