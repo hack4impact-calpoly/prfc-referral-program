@@ -188,6 +188,7 @@ export default function ReferralForm() {
         <button type="submit" className={styles.button}>
           Invite
         </button>
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         {prospects.length < 5 ? (
           <button type="button" onClick={addProspect} className={styles.plusBox}>
             +
@@ -195,7 +196,6 @@ export default function ReferralForm() {
         ) : (
           <p className={styles.limitMessage}>You’ve reached the max of 5 referrals.</p>
         )}
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         <input type="hidden" name="referrerEmail" value={referrerEmail} />
         <input type="hidden" name="referrerFirstName" value={referrerFirstName} />
         <input type="hidden" name="referrerLastName" value={referrerLastName} />
