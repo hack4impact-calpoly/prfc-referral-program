@@ -156,7 +156,7 @@ export default function ReferralForm() {
           {prospects.map((prospect, index) => (
             <div key={index} className={styles.prospectContainer}>
               <button type="button" onClick={() => deleteProspect(index)} className={styles.crossButton}>
-                <Image src="/trash.png" alt="Delete" width={18} height={18} />
+                <Image src="/assets/trash.png" alt="Delete" width={18} height={18} />
               </button>
               <div className={styles.inputFields}>
                 <div className={styles.nameRow}>
