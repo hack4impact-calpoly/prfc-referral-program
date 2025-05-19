@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 import { POST } from "./route";
-import { calculateChecksum } from "../../../utils/checksum";
+import { calculateChecksum } from "@/utils/checksum";
 
-jest.mock("../../../utils/checksum", () => ({
+jest.mock("@/utils/checksum", () => ({
   calculateChecksum: jest.fn(),
 }));
 
