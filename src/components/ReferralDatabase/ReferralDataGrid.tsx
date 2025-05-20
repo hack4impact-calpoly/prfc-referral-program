@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import dayjs from "dayjs"; // For date
 
 const CustomToolbar = ({ onExport }: { onExport: () => void }) => {
   return (

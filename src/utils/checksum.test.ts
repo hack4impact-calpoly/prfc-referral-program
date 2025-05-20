@@ -2,8 +2,7 @@ import { calculateChecksum } from "./checksum";
 
 describe("Checksum Function", () => {
   it("should calculate the correct checksum for a given string", () => {
-    //const input = "test@example.comJohn Doe12345";
-    const input = "amandayen124@gmail.comJohn Doe12345";
+    const input = "test@example.comJohn Doe12345";
     const expectedChecksum = calculateChecksum(input); // Dynamically calculate the expected checksum
     expect(calculateChecksum(input)).toBe(expectedChecksum);
   });
