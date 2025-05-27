@@ -26,6 +26,11 @@ export async function POST(req: NextRequest) {
     if (!Array.isArray(prospects) || prospects.length === 0) {
       return NextResponse.json({ message: "At least one prospect is required." }, { status: 400 });
     }
+
+    if (prospects.length > 5) {
+      return NextResponse.json({ message: "You can only refer up to 5 prospects at a time." }, { status: 400 });
+    }
+
     // Loop through prospects to validate each entry
     for (let i = 0; i < prospects.length; i++) {
       const prospect = prospects[i];

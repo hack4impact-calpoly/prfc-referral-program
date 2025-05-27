@@ -56,26 +56,26 @@
   box-sizing: border-box;
 }
 
-/* Button styling */
 .button {
   display: flex;
-  width: 80px;
-  height: 36px;
-  padding: 12px 18px;
   align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1.5rem;
   gap: 10px;
-  border-radius: 8px;
-  background: var(--red, #831002);
-  color: #ffffff;
   border: none;
+  border-radius: 8px;
+  background-color: var(--red, #831002);
+  color: #fff;
   font-size: 1.125rem;
   font-weight: 200;
+  text-align: center;
   cursor: pointer;
+  align-self: flex-end;
   transition:
     background-color 0.2s,
     transform 0.1s;
-  text-align: center;
-  align-self: flex-end;
 }
 
 /* Button hover and active effects */
@@ -139,7 +139,8 @@
 .error {
   color: red;
   font-weight: bold;
-  margin-top: 10px;
+  align-self: flex-end;
+  margin-top: -1.5rem;
 }
 
 .inputFields {
@@ -156,13 +157,11 @@
   flex-wrap: wrap;
 }
 
-/* .nameRow input {
-  flex: 1;
-  min-width: 120px; 
-} */
-
 .emailRow {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
 }
 
@@ -205,25 +204,26 @@
 @media (min-width: 768px) {
   .inputFields {
     flex-direction: row;
-    /* gap: 15px; */
   }
 
   .nameRow {
-    width: 60%;
+    flex: 1;
   }
 
   .emailRow {
-    width: 40%;
+    flex: 1;
   }
-
-  /* .crossButton {
-    margin-bottom: 0;
-    align-self: center;
-  } */
 }
 
 @media (max-width: 480px) {
   .nameRow {
     flex-direction: column;
   }
+}
+
+.limitMessage {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #7b3f00;
+  margin: 0;
 }

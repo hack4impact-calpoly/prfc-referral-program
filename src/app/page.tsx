@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <div className={styles.heroImageWrapper}>
           <Image
-            src="/produce.jpg"
+            src="/assets/produce.jpg"
             alt="Fresh Produce"
             fill
             className={styles.heroImage}
@@ -32,12 +32,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Refer & Referral History */}
+      {/* Why Refer & Referral History Section */}
       <section className={styles.referralSection}>
         <div className={styles.leftSection}>
           <div className={styles.produceImageWrapper}>
             <Image
-              src="/produce_2.jpg"
+              src="/assets/produce_2.jpg"
               alt="Fresh Produce"
               fill
               className={styles.produceImage}
