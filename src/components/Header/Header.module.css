@@ -23,7 +23,7 @@
 
 @media (max-width: 768px) {
   .header {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/produce.jpg");
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("/assets/produce.jpg");
     height: auto;
     background-size: 100% auto;
     background-repeat: no-repeat;
