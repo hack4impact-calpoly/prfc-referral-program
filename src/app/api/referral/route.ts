@@ -116,9 +116,9 @@ async function sendEmail(prospects: any, ref: any, member: any) {
       <p>It's easy to join the Co-op and start making an impact in our community! Just click the link below to complete your membership registration:</p>
       
     <p>
-        <span style="font-weight: bold;">👉 <a href="https://www.pasoroblescoop.com" style="color: black; text-decoration: none;">Join Now</a></span>
+        <span style="font-weight: bold;">👉 <a href="https://www.pasofoodcooperative.com/join-now1.html?enterReferral=${ref}" style="color: black; text-decoration: none;">Join Now</a></span>
       </p>
-      <p>Your unique referral code is <strong>${ref}</strong>—be sure to confirm/enter it during registration.</p>
+      <p>Your referral code is <strong>${ref}</strong>—be sure to confirm/enter it during registration.</p>
       
       <p>Feel free to reach out if you have any questions or want to learn more about what makes the Paso Robles Food Co-op special. Our monthly meeting is every 4<sup>th</sup> Wednesday at 6pm. All details and info at our website: <a href="www.pasofoodcooperative.com" style="color: #333; text-decoration: underline;">www.pasofoodcooperative.com</a></p>
       
